@@ -14,10 +14,18 @@ dy = p2(2) - p1(2);
 % end
 
 pts = [];
-for x = p1(1): p2(1)
-    t = (x - p1(1)) / dx;
-    y = round(p1(2) + t * dy);
-    pts(:, end + 1) = [x; y];
+if dy < dx
+    for x = p1(1): p2(1)
+        t = (x - p1(1)) / dx;
+        y = (p1(2) + t * dy);
+        pts(:, end + 1) = [x; y];
+    end
+else
+    for y = p1(2): p2(2)
+        t = (y - p1(2)) / dy;
+        x = (p1(1) + t * dx);
+        pts(:, end + 1) = [x; y];
+    end
 end
 
 end
