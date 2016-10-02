@@ -1,0 +1,19 @@
+function image = supplot_boxes( m, n, width, height )
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+
+spaces_per_box = 3;
+
+box.width = get_box_width(width, n, spaces_per_box);
+box.height = get_box_width(height, m, spaces_per_box);
+
+space.width = box.width / spaces_per_box;
+
+end
+
+function box_width = get_box_width(total_width, number_of_boxes, spaces_per_box)
+    box_width = round(...
+        (spaces_per_box * total_width) / ...
+        ((spaces_per_box + 1) * number_of_boxes - 1));
+end
+
