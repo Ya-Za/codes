@@ -3,32 +3,21 @@ close all;
 clear;
 clc;
 
-%% 
-width = 500;
-height = 500;
+%% properties 
+line1 = [0, 0, 1, 1];
+line2 = [1, 0, 0, 1];
 
-t = [width / 2; height / 2];
-theta = 30;
-R = [cosd(theta), -sind(theta); sind(theta), cosd(theta)];
+%% plot lines
+axis([-5, 5, -5, 5]), grid on, grid minor;
+Cam2.draw_lines(line1(1:2), line1(3:4), 'blue');
+Cam2.draw_lines(line2(1:2), line2(3:4), 'red');
 
-transform = @(x) R * x + t;
+%% ployxpoly
+% [x, y] = polyxpoly([line1.p1(1), line1.p2(1)], [line1.p1(2), line1.p2(2)], [line2.p1(1), line2.p2(1)], [line2.p1(2), line2.p2(2)]);
+% 
+% disp(x)
+% disp(y)
 
-% circle
-circle.c = [0; 0];
-circle.r = 50;
+p = Cam2.linexline(line1, line2);
 
-% rectangle
-rect.x = -50;
-rect.y = -50;
-rect.width = 100;
-rect.height = 100;
-
-
-%%
-
-image = zeros(width, height, 'uint8');
-
-% image = insertShape(image,'circle', [transform(circle.c); circle.r]', 'color', [255, 255, 255]);
-image = insertShape(image,'rectangle', [transform([rect.x; rect.y]); rect.width; rect.height]', 'color', [255, 255, 255]);
-
-imshow(image);
+disp(p);
