@@ -1,6 +1,7 @@
 1. ~~2d translation~~
 1. ~~2d rotation~~
 1. ~~2d transformation~~
+1. rotation around axis
 1. transform image
 1. line
 1. poly_line

@@ -3,6 +3,10 @@ close all;
 clear;
 clc;
 
-%%
+%% Properties
 limits = [-1, 1, -1, 1];
-df = DrawFunction(limits);
+
+%% 
+df = DrawFunction();
+df.limits = limits;
+df.run();
