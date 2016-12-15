@@ -10,8 +10,8 @@ def main():
         continuous=True, \
         perfect=True, \
         negative=True, \
-        interrogative=False, \
-        passive=False))
+        interrogative=True, \
+        passive=True))
 
 
 class Verb(object):
@@ -32,7 +32,7 @@ class Verb(object):
     perfect=False, \
     negative=False, \
     interrogative=False, \
-    passive=False):
+    passive=True):
         '''
         Get verb based on code
         subject = [1, 2, 3, 4, 5, 6] = [
@@ -56,7 +56,6 @@ class Verb(object):
 
         have = ''
         if perfect:
-            ed_ = 'ed '
             if tense == -1:
                 have = 'had '
             elif tense == 0:
@@ -67,9 +66,8 @@ class Verb(object):
             else:
                 have = 'have '
 
-        tobe, ing = '', ''
+        tobe = ''
         if continuous:
-            ing = 'ing '
             if perfect:
                 tobe = 'been '
             else:
@@ -88,15 +86,29 @@ class Verb(object):
                 else:
                     tobe = 'be '
 
-        es_ = ''
-        if subject == 3 and tense == 0 and not continuous and not perfect:
-            es_ = 's '
-
-        ed_ = ''
-        if not continuous and (tense == -1 or perfect):
-            ed_ = 'ed '
-
+        subject = Verb.pron[subject - 1]
         aux = ''
+        if passive:
+            if tobe != '':
+                aux = 'being '
+            elif have != '':
+                aux = 'been '
+            else:
+                if tense == -1:
+                    if subject == 1 or subject == 3:
+                        aux = 'was '
+                    else:
+                        aux = 'were'
+                elif tense == 0:
+                    if subject == 1:
+                        aux = 'am'
+                    elif subject == 3:
+                        aux = 'is'
+                    else:
+                        aux = 'are'
+                else:
+                    aux = 'be '
+
         if negative:
             if will != '':
                 will += 'not '
@@ -104,6 +116,8 @@ class Verb(object):
                 have += 'not '
             elif tobe != '':
                 tobe += 'not '
+            elif aux != '':
+                aux += 'not'
             else:
                 if tense == -1:
                     ed_ = ''
@@ -115,9 +129,46 @@ class Verb(object):
                     else:
                         aux = 'do not '
 
-        subject = Verb.pron[subject]
-        verb = will + have + tobe + aux + verb + es_ + ed_ + ing
-        return subject + verb
+        if interrogative:
+            if will != '':
+                will += subject
+            elif have != '':
+                have += subject
+            elif tobe != '':
+                tobe += subject
+            elif aux != '':
+                aux += subject
+            else:
+                if tense == -1:
+                    ed_ = ''
+                    aux = 'did ' + subject
+                elif tense == 0:
+                    es_ = ''
+                    if subject == 3:
+                        aux = 'does ' + subject
+                    else:
+                        aux = 'do ' + subject
+
+        es_ = ''
+        if will == '' and have == '' and tobe == '' and aux == '' and subject == 3:
+            es_ = 's '
+
+        ed_ = ''
+        if passive or \
+        (perfect and not continuous) or \
+        (tense == -1 and not continuous and not negative and not interrogative):
+            ed_ = 'ed '
+
+        ing_ = ''
+        if not passive and continuous:
+            ing_ = 'ing'
+
+        verb = will + have + tobe + aux + verb + es_ + ed_ + ing_
+
+        if interrogative:
+            return verb
+        else:
+            return subject + verb
 
 
 if __name__ == '__main__':

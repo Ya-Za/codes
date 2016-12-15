@@ -1,0 +1,1476 @@
+abandon v W3
+abandoned adj
+abnormal adj
+abstract adj
+abstract n
+abstract v
+abstraction n
+academic adj W2
+academic n
+academy n
+access n S3, W1
+access v
+accessible adj
+accommodate v
+accommodation n S2, W2
+accompaniment n
+accompany v W2
+accumulate v
+accuracy n
+accurate adj S2, W3
+achieve v S1, W1
+achievement n S3, W2
+acknowledge v S3, W3
+acknowledgement n
+acquire v W2
+acquisition n W3
+adaptable adj
+adaptation n
+adequate adj S3, W3
+adjacent adj
+adjust v W3
+adjustment n
+administration n S2, W2
+administrative adj W3
+adult n S2, W2
+adult adj W3
+advocacy n
+advocate v
+advocate n
+affect v S1, W1
+aggregate n
+aggregate adj
+aggregate v
+aid n S2, W2
+aid v
+albeit conjunction
+allocate v
+allocation n
+alter v S3, W3
+alteration n
+alternate adj
+alternate v
+alternative adj S2, W2
+alternative n S2, W3
+ambiguity n
+ambiguous adj
+amend v S3
+amendment n
+analogous adj
+analogy n
+analyse v W3
+analysis n S3, W1
+analyst n
+analytical adj
+analyze v
+annual adj S2, W2
+anticipate v S3
+anticipation n
+apparent adj W2
+append v
+appendix n
+appreciable adj
+appreciate v S2, W3
+appreciation n
+approach v S3, W2
+approach n S3, W1
+appropriate adj S1, W1
+approximate adj S3, W3
+approximate v
+approximation n
+arbitrary adj
+area n S1, W1
+aspect n S3, W1
+assemble v
+assembly n S3, W2
+assess v S2, W2
+assessment n S2, W2
+assign v
+assignment n S2
+assist v S3, W3
+assistance n S3, W2
+assume v S1, W1
+assuming conjunction
+assumption n S2, W2
+assurance n
+assure v S2, W3
+attach v S2, W2
+attachment n
+attain v
+attainment n
+attitude n S1, W1
+attributable adj
+attribute v
+attribute n
+author n W2
+author v
+authoritative adj
+authority n W1
+authorship n
+automate v
+automated adj
+automatic adj S3
+automatically adv S3, W3
+automation n
+available adj S1, W1
+aware adj S1, W1
+awareness n W3
+
+
+behalf n
+beneficial adj
+beneficiary n
+benefit v S2, W3
+bias n
+bias v
+biased adj
+bond n W3
+bond v
+brevity n
+brief adj S2, W2
+brief n
+brief v
+briefing n
+briefly adv S2, W3
+bulk n
+bulky adj
+
+
+capability n S3
+capable adj S2, W2
+capacity n S3, W2
+category n S2, W2
+cease v W3
+challenge n S2, W2
+challenge v S3, W3
+challenging adj
+channel n S3, W2
+chapter n S3, W1
+chart n S3, W3
+chart v
+chemical n S3, W3
+chemical adj W3
+circumstance n S1, W1
+citation n
+cite v
+civil adj S2, W2
+clarification n
+clarify v
+clarity n
+classic adj W3
+classic n
+classical adj W3
+clause n S3, W2
+code n S2, W2
+code v
+coded adj
+coding n
+coherence n
+coherent adj
+coincide v
+coincidence n
+coincident adj
+coincidental adj
+collapse v S3
+collapse n
+colleague n S3, W2
+commence v
+commencement n
+comment n S1, W2
+comment v S2, W3
+commentary n
+commentator n
+commission n S1, W1
+commission v
+commit v S2, W2
+commitment n S2, W2
+committed adj
+commodity n
+communicable adj
+communicate v S3, W3
+communication n S2, W1
+communicative adj
+community n S1, W1
+compatibility n
+compatible adj
+compensate v
+compensation n W3
+compensatory adj
+compilation n
+compile v
+complement n
+complement v
+complementary adj
+complex adj S3, W2
+complex n
+complexity n
+component n S3, W2
+component adj
+compound n
+compound v
+compound adj
+comprehensive adj W3
+comprise v W3
+computation n
+compute v
+computer n S1, W1
+computing n
+conceivable adj
+conceive v
+concentrate v S2, W2
+concentration n S3, W2
+concept n S3, W2
+conception n
+conceptual adj
+conclude v S3, W2
+concluding adj
+conclusion n S2, W2
+conclusive adj
+concurrent adj
+conduct v S3, W2
+conduct n W3
+confer v
+conference n S3, W1
+confine v W3
+confined adj
+confirm v S2, W2
+confirmation n
+conflict n S2, W2
+conflict v
+conform v
+conformation n
+conformist adj
+conformity n
+consensus n
+consent n W3
+consent v
+consequence n S3, W2
+consequent adj
+consequently adv W3
+considerable adj S2, W1
+considerably adv S3, W3
+consist v W3
+consistency n
+consistent adj S3, W3
+constancy n
+constant adj S2, W2
+constant n
+constantly adv S3, W3
+constituency n W3
+constituent n
+constituent adj
+constitute v W3
+constitution n W2
+constitutional adj W3
+constrain v
+constrained adj
+constraint n W3
+construct v W3
+construct n
+construction n S3, W2
+constructive adj
+consult v S3, W3
+consultancy n
+consultant n S3, W3
+consultation n S3, W3
+consultative adj
+consume v
+consumer n S2, W2
+consumption n W3
+contact n S3, W2
+contact v S3, W2
+contact adj
+contemporary adj W2
+contemporary n
+context n S3, W1
+contextual adj
+contextualize v
+contract n S2, W1
+contract v
+contractor n
+contradict v
+contradiction n
+contradictory adj
+contrary n
+contrary adj
+contrast n W2
+contrast v
+contrasting adj
+contribute v S2, W2
+contribution n S2, W2
+contributor n
+controversial adj
+controversy n
+convene v
+convention n W2
+conventional adj W3
+converse adj
+conversely adv
+conversion n
+convert v W3
+convertible adj
+convince v S3, W3
+convinced adj
+convincing adj
+cooperate v
+cooperation n S3, W2
+cooperative adj
+coordinate v
+coordinate n
+coordinate adj
+coordination n
+coordinator n
+core n W3
+core adj
+core v
+corporate adj W2
+corporation n S3, W2
+correspond v
+correspondence n
+corresponding adj
+couple n S1, W1
+couple v
+create v S1, W1
+creation n S3, W2
+creative adj S3, W3
+creativity n
+creator n
+credit n S2, W2
+credit v
+creditor n
+criterion n W2
+crucial adj S3, W2
+cultural adj W2
+culturally adv
+culture n S2, W1
+currency n W2
+cycle n S3, W3
+cycle v
+cyclic adj
+
+
+data n S1, W1
+debatable adj
+debate n S1, W2
+debate v
+decade n S3, W2
+decline n W2
+decline v W3
+deduce v
+deduction n
+define v S3, W2
+definite adj S3
+definitely adv S1
+definition n S3, W2
+definitive adj
+demonstrable adj
+demonstrate v W2
+demonstration n S3, W3
+demonstrative adj
+demonstrator n
+denial n
+denote v
+deny v S2, W2
+depress v
+depression n S3, W3
+derivation n
+derivative n
+derive v
+design n S3, W1
+design v S3, W1
+designer n W3
+despite prep S2, W1
+detect v W3
+detection n
+detective n W3
+detector n
+deviate v
+deviation n
+device n W2
+devote v
+devoted adj
+devotion n
+differentiate v
+dimension n W3
+diminish v
+diminution n
+discrete adj
+discretion n
+discretionary adj
+discriminate v
+discrimination n
+disestablish v
+displace v
+displacement n
+display n W2
+display v W2
+disposable adj
+disposal n
+dispose v
+disproportion n
+disproportionate adj
+dissimilar adj
+distinct adj W3
+distinction n S3, W2
+distinctive adj
+distinctly adv
+distort v
+distribute v W3
+distribution n W2
+distributive adj
+diverse adj
+diversify v
+diversity n
+document n W2
+document v
+documentation n
+domain n
+domestic adj W2
+domesticate v
+domesticated adj
+dominance n
+dominant adj W3
+dominate v W3
+draft n S2, W3
+draft v
+draft adj
+drama n W3
+dramatic adj
+dramatist n
+dramatize v
+duration n
+dynamic adj
+dynamic n
+
+
+economic adj S3, W1
+economical adj
+economically adv
+economics n W3
+economist n
+economy n S3, W1
+edition n W3
+editor n W2
+editorial adj
+editorial n
+element n S2, W1
+eliminate v
+elimination n
+emerge v W2
+emergence n
+emergent adj
+emerging adj
+emphasis n S3, W2
+emphasize v S2, W2
+emphatic adj
+empirical adj
+empiricism n
+enable v S3, W1
+enabling adj
+encounter v W3
+encounter n
+energetic adj
+energy n S1, W1
+enforce v
+enforced adj
+enforcement n
+enhance v W3
+enhanced adj
+enormity n
+enormous adj S2, W3
+enormously adv
+ensure v S3, W1
+entity n
+environment n S1, W1
+environmental adj S1, W2
+environmentalist n
+equate v
+equation n W3
+equip v
+equipment n S2, W2
+equivalent adj W3
+equivalent n
+erode v
+erosion n
+erroneous adj
+error n S2, W2
+establish v S3, W1
+established adj W3
+establishment n S3, W2
+estate n S2, W2
+estimate n S3, W2
+estimate v S3, W3
+estimation n
+ethic n
+ethical adj
+ethnic adj W3
+ethnic n
+evaluate v
+evaluation n W3
+eventual adj
+eventuality n
+eventually adv S1, W2
+evidence n S3, W1
+evident adj W3
+evidential adj
+evidently adv
+evolution n W3
+evolutionary adj
+evolve v
+exceed v W3
+exclude v S2, W3
+excluding prep
+exclusion n
+exclusive adj
+exclusively adv
+exhibit v
+exhibit n
+exhibition n W2
+expand v S2, W3
+expansion n W3
+expansionism n
+expansive adj
+expert n S3, W2
+expert adj W3
+expertise n W3
+explicit adj
+exploit v W3
+exploitation n
+export n W2
+export v
+exporter n
+expose v W3
+exposed adj
+exposure n W3
+external adj W2
+externalize v
+extract v
+extract n
+extraction n
+
+
+facilitate v
+facilitator n
+facility n S3, W1
+factor n S3, W1
+factor v
+feature n S2, W1
+feature v W3
+federal adj W3
+federation n
+fee n S2, W2
+file n S1, W2
+file v S3
+filing n
+final adj S1, W1
+final n
+finality n
+finalize v
+finally adv S2, W1
+finance n S3, W2
+finance v W3
+financier n
+finite adj
+flexibility n
+flexible adj
+fluctuate v
+fluctuation n
+focus v W2
+focus n W2
+focussed adj
+format n W3
+format v
+formula n W3
+formulate v
+forthcoming adj
+found v W3
+foundation n W2
+founder n
+founding n
+framework n W3
+function n S3, W1
+function v
+functional adj
+fund n S3, W1
+fund v S3, W3
+fundamental adj S2, W2
+fundamentally adv
+funding n
+furthermore adv W3
+
+
+gender n
+generate v W2
+generation n S2, W2
+globalization n
+globe n
+goal n S2, W1
+grade n S3, W3
+grade v
+graded adj
+grant v S2, W2
+grant n S1, W2
+guarantee v S2, W3
+guarantee n S2
+guideline n
+
+
+hence adv W2
+hierarchical adj
+hierarchy n
+highlight v W3
+hypothesis n
+hypothesize v
+hypothetical adj
+
+
+identical adj
+identifiable adj
+identification n
+identify v W1
+identity n W2
+ideological adj
+ideology n W3
+ignorance n
+ignorant adj
+ignore v S2, W2
+illegal adj
+illogical adj
+illustrate v W2
+illustration n
+illustrative adj
+image n S3, W1
+imagery n
+immature adj
+immigrant n
+immigrate v
+immigration n
+impact n W2
+impact v
+implement v W3
+implement n
+implicate v
+implication n W2
+implicit adj
+imply v W2
+impose v W2
+imposition n
+imprecise adj
+inaccessible adj
+inaccuracy n
+inaccurate adj
+inadequacy n
+inadequate adj
+inappropriate adj
+incapable adj
+incapacitate v
+incentive n S3
+incidence n
+incident n W2
+incidentally adv S3
+inclination n
+incline v
+incline n
+incoherent adj
+income n S2, W1
+incompatible adj
+inconceivable adj
+inconclusive adj
+inconsistency n
+inconsistent adj
+incorporate v W3
+incorporated adj
+indefinite adj
+indefinitely adv
+index n W3
+index v
+indicate v W1
+indication n W3
+indicative n
+indicative adj
+indicator n
+indiscretion n
+indistinct adj
+individual adj S3, W1
+individual n W1
+individualism n
+individualist n
+individuality n
+individually adv
+induce v
+induction n
+inevitability n
+inevitable adj W3
+inevitably adv W3
+infer v
+inference n
+infinite adj
+infinitely adv
+inflexible adj
+infrastructure n
+inherent adj
+inhibit v
+inhibition n
+initial adj W2
+initially adv W3
+initiate v
+initiation n
+initiative n W2
+initiator n
+injure v
+injured adj
+innovate v
+innovation n W3
+innovative adj
+innovator n
+input n W3
+input v
+insecure adj
+insert v
+insertion n
+insight n
+insightful adj
+insignificant adj
+inspect v
+inspection n S3
+inspector n
+instability n
+instance n S3, W2
+instance v
+institute n W2
+institute v
+institution n W1
+institutional adj
+institutionalized adj
+instruct v
+instruction n S3, W2
+instructive adj
+instructor n
+insufficient adj
+integral adj
+integrate v
+integrated adj
+integration n W3
+integrity n
+intelligence n S3, W3
+intense adj W3
+intensify v
+intensity n
+intensive adj
+interact v
+interaction n W3
+interactive adj
+intermediate adj
+internal adj W2
+internalize v
+interpret v W3
+interpretation n W2
+interpretative adj
+interpretive adj
+interval n W3
+intervene v
+intervening adj
+intervention n W3
+intrinsic adj
+invalidate v
+invalidity n
+invariable adj
+invariably adv
+invest v W3
+investigate v W2
+investigation n W2
+investigative adj
+investigator n
+investment n W1
+investor n W3
+invisible adj
+invoke v
+involve v S2, W1
+involvement n W3
+irrational adj
+irrelevance n
+irrelevant adj
+irreversible adj
+isolate v
+isolated adj W3
+isolation n
+isolationism n
+issue v W2
+item n W1
+
+
+journal n
+justifiable adj
+justification n
+justified adj
+justify v S2, W3
+
+
+label n W3
+label v
+labor n
+labored adj
+labour n S3, W1
+labour v
+laboured adj
+layer n S3, W3
+layer v
+lecture n S3, W3
+lecture v
+lecturer n
+legal adj S3, W1
+legality n
+legally adv
+legislate v
+legislation n W2
+legislative adj
+legislator n
+legislature n
+levy v
+levy n
+liberal adj W2
+liberal n
+liberalism n
+liberalize v
+liberally adv
+liberate v
+liberated adj
+licence n S3, W2
+license v
+licensed adj
+likewise adv
+link v W2
+link n S3, W2
+linkage n
+locate v S3, W3
+location n S3, W2
+logic n
+logical adj S3
+logician n
+
+
+maintain v S3, W2
+maintenance n S2, W3
+major adj S3, W2
+majority n
+manipulate v
+manipulative adj
+manual adj
+manual n
+margin n S3, W3
+marginal adj
+marginally adv
+maturation n
+mature adj
+mature v
+maturity n
+maximize v
+maximum adj S2, W3
+maximum n
+mechanism n
+media n S2, W2
+mediate v
+medical adj S2, W2
+medium adj S3
+medium n
+mental adj S2, W2
+mentality n
+methodical adj
+methodology n
+migrant n
+migrate v
+migration n
+migratory adj
+military adj S2, W1
+military n
+minimal adj
+minimize v
+minimum adj S2, W3
+minimum n
+ministerial adj
+ministry n W2
+minor adj S2, W2
+minority n S3, W2
+misinterpret v
+mode n W3
+modification n
+modify v
+monitor v S3, W3
+motivated adj
+motivation n
+motive n
+motive adj
+mutual adj
+mutually adv
+
+
+negate v
+negative adj S2, W2
+negative n
+network n W3
+network v
+networking n
+neutral adj
+neutrality n
+neutralize v
+nevertheless adv S3
+nonconformist n
+nonetheless adv
+norm n
+normal adj S1, W1
+normal n
+normality n
+normalize v
+normally adv S1, W2
+notion n W3
+notwithstanding prep
+nuclear adj W3
+
+
+objective n W3
+objective adj S3
+objectively adv
+obtain v S2, W2
+obtainable adj
+obvious adj S2, W2
+obviously adv S1, W2
+occupancy n
+occupant n
+occupation n S3, W3
+occupational adj
+occupier n
+occupy v S3, W2
+occur v S1, W1
+occurrence n
+odd adj S1, W3
+odds n S3
+offset v
+ongoing adj
+option n S1, W2
+optional adj
+orient v
+orientate v
+orientated adj
+orientation n
+oriented adj
+outcome n W3
+output n W2
+output v
+overall adj S3, W2
+overall adv
+overestimate v
+overestimate n
+overlap v
+overlap n
+overseas adv W3
+overseas adj
+
+
+panel n S1, W2
+paradigm n
+paragraph n S3, W3
+parallel n
+parallel adj
+parallel v
+parameter n
+participant n W3
+participate v W3
+participation n W3
+participatory adj
+partner n S3, W2
+partnership n W3
+passive adj
+passive n
+perceive v W3
+percent adj S3
+percent n S3, W3
+percentage n W3
+perception n W3
+period n S3, W1
+periodic adj
+periodical n
+persist v
+persistence n
+persistent adj
+perspective n W3
+phase n W2
+phase v
+phenomenal adj
+phenomenon n W3
+philosopher n
+philosophical adj
+philosophize v
+philosophy n W3
+physical adj S2, W1
+physically adv S3
+plus prep S1, W2
+plus n
+plus adj
+policy n S3, W1
+portion n
+pose v W3
+pose n
+positive adj S2, W2
+positively adv
+potential adj S3, W2
+potential n W3
+potentially adv
+practitioner n W3
+precede v W3
+precedence n
+precedent n
+preceding adj
+precise adj W3
+precisely adv S2, W3
+precision n
+precision adj
+predict v S3, W3
+predictable adj
+prediction n
+predominance n
+predominant adj
+predominantly adv
+predominate v
+preliminary adj
+preliminary n
+presumably adv S1, W3
+presume v S3
+presumption n
+previous adj S1, W1
+previously adv S3, W2
+primacy n
+primarily adv W3
+primary adj S3, W2
+prime adj
+principal adj W2
+principally adv
+principle n S3, W1
+principled adj
+prior adj W3
+prioritize v
+priority n S2, W2
+procedural adj
+procedure n S3, W2
+proceed v S3, W3
+proceeding n W2
+proceeds n
+process n S2, W1
+process v
+processed adj
+professional adj S2, W1
+professional n W3
+professionalism n
+professionally adv
+prohibit v
+prohibition n
+prohibitive adj
+project n S1, W1
+project v
+projection n S3
+promote v S3, W2
+promoter n
+promotion n S3, W3
+proportion n S2, W2
+proportional adj
+proportionate adj
+prospect n S2, W2
+prospective adj
+protocol n
+psychological adj W3
+psychologist n
+psychology n W3
+publication n W2
+publish v S3, W1
+publisher n W3
+publishing n
+purchase v S3, W3
+purchase n S3, W3
+pursue v S3, W2
+pursuit n
+
+
+qualitative adj
+quotation n
+quote v S2, W3
+quote n S2
+
+
+radical adj W3
+radical n
+random adj
+range n S1, W1
+range v W3
+ratio n S3, W3
+rational adj
+rationalism n
+rationalize v
+react v S3, W3
+reaction n S2, W2
+reactionary adj
+reactionary n
+reactivate v
+reactive adj
+reactor n
+readjust v
+reassess v
+reconstruct v
+reconstruction n
+recover v W2
+recovery n W3
+recreate v
+redistribute v
+redistribution n
+refine v
+refined adj
+refinement n
+regime n W2
+region n S1, W1
+regional adj S1, W2
+register n S3, W3
+register v W3
+registration n S3
+regulate v
+regulation n S2, W2
+regulator n
+regulatory adj
+reinforce v W3
+reinforcement n
+reinvest v
+reject v S2, W2
+rejection n
+relax v S3, W3
+relaxation n
+release v S2, W2
+release n S2, W3
+relevant adj S2, W2
+reliable adj
+reliance n
+reliant adj
+relocate v
+reluctance n
+reluctant adj
+rely v S2, W2
+removable adj
+removal n S3
+remove v S2, W1
+remove n
+require v S1, W1
+requirement n S2, W2
+reschedule v
+research n S2, W1
+research v
+reside v
+residence n
+resident n S2, W3
+resident adj
+residential adj W3
+resolution n W3
+resolve v W3
+resolve n
+resource n S2, W1
+resource v
+resourceful adj
+respond v S2, W2
+respondent n
+response n S1, W1
+responsive adj
+restoration n
+restore v W3
+restored adj
+restrain v
+restraint n
+restrict v S3, W3
+restricted adj
+restriction n S2, W3
+restrictive adj
+restructure v
+retain v S2, W2
+retainer n
+retention n
+retentive adj
+reveal v S3, W1
+revealing adj
+revelation n
+revenue n W2
+reversal n
+reverse v
+reverse n
+reverse adj
+reversible adj
+revise v
+revision n
+revolution n S3, W2
+revolutionary adj
+revolutionary n
+revolutionize v
+rigid adj
+role n W3
+route n W2
+route v
+
+
+scenario n
+schedule n S3, W3
+schedule v
+schematic adj
+scheme n W1
+scheme v
+scope n W3
+section n S1, W1
+section v
+sector n W1
+secure adj S3
+secure v W2
+securely adv
+security n W1
+seek v W1
+select v S2, W2
+select adj
+selection n S2, W2
+selective adj
+selector n
+sequence n W2
+sequencing n
+sequential adj
+series n S2, W1
+sex n S1, W2
+sexism n
+sexual adj S2, W2
+sexuality n
+shift v W3
+shift n
+significant adj S3, W1
+significantly adv S3, W2
+signify v
+similar adj S1, W1
+similarity n W2
+similarly adv
+simulate v
+simulated adj
+simulation n
+site n W2
+sole adj W3
+solely adv
+somewhat adv S2, W2
+source n S2, W1
+source v
+specific adj S1, W1
+specific n
+specifically adv S2, W3
+specification n
+specify v W3
+sphere n
+spherical adj
+stability n
+stabilize v
+stable adj W3
+statistic n S2, W3
+statistician n
+status n W2
+straightforward adj S3
+strategic adj W3
+strategist n
+strategy n W2
+stress n S3, W3
+stress v
+stressed adj
+stressful adj
+structural adj
+structure n S3, W2
+structure v
+structured adj
+style n S2, W1
+styling n
+stylish adj
+stylized adj
+submission n S2
+submit v S2, W3
+subordinate adj
+subordinate n
+subordinate v
+subsequent adj W2
+subsequently adv W3
+subsidiary adj
+subsidize v
+subsidy n
+substitute n
+substitute v
+substitution n
+succession n W3
+successive adj
+successor n
+sufficiency n
+sufficient adj S2, W2
+sum n S3, W2
+sum v
+summarize v
+summary n
+summary adj
+summation n
+supplement n
+supplement v
+supplementary adj
+survey n S3, W3
+survey v
+survival n W3
+survive v S2, W2
+survivor n
+suspend v
+suspension n
+sustain v W3
+sustainable adj
+sustained adj
+sustenance n
+symbol n W3
+symbolic adj
+symbolism n
+symbolize v
+
+
+tape n S3, W3
+tape v S3
+target n S3, W2
+target v
+task v
+team v
+technical adj S2, W2
+technically adv S3
+technique n S3, W1
+technological adj
+technology n S2, W1
+temporary adj S2, W3
+tense adj
+tension n S3, W2
+terminal adj
+terminal n
+terminate v
+termination n
+textual adj
+thematic adj
+theme n S2, W2
+theoretical adj W3
+theoretically adv
+theorist n
+theory n S2, W1
+thereby adv W3
+thesis n
+topic n W2
+topical adj
+trace v
+trace n
+tracing n
+traditional adj S3, W1
+traditionalist n
+transfer v W2
+transfer n W2
+transference n
+transform v W3
+transformation n
+transit n
+transition n W3
+transitional adj
+transitory adj
+transmission n
+transmit v
+transport n S3, W2
+transport v
+transportation n S3, W3
+transporter n
+trigger n
+trigger v
+
+
+ultimate adj W3
+ultimately adv W3
+unaccompanied adj
+unaffected adj
+unaided adj
+unalterable adj
+unambiguous adj
+unanticipated adj
+unapproachable adj
+unattached adj
+unattainable adj
+unavailable adj
+unaware adj
+unbiased adj
+uncharted adj
+unconstitutional adj
+unconventional adj
+undeniable adj
+underestimate v
+underestimate n
+undergo v
+underlie v
+underlying adj W3
+undertake v W3
+undertaking n
+underwent v
+undiminished adj
+uneconomical adj
+unethical adj
+unfounded adj
+unification n
+unified adj
+uniform adj
+uniformity n
+unify v
+unique adj S3, W2
+unjustified adj
+unlicensed adj
+unobtainable adj
+unparalleled adj
+unprecedented adj
+unpredictable adj
+unprincipled adj
+unpublished adj
+unregulated adj
+unreliable adj
+unresolved adj
+unresponsive adj
+unrestrained adj
+unrestricted adj
+unscheduled adj
+unspecified adj
+unstable adj
+unstressed adj
+unstructured adj
+unsustainable adj
+utility n
+utilize v
+
+
+valid adj
+validate v
+variable adj
+variable n
+variance n
+variant n
+variation n W2
+varied adj
+vary v S2, W2
+vehicle n S2, W2
+version n W1
+via prep W2
+violate v
+violation n
+virtual adj
+virtually adv S2, W2
+visibility n
+visible adj W3
+visibly adv
+vision n S3, W2
+visual adj W3
+visualize v
+visually adv
+volume n W2
+voluntarily adv
+voluntary adj W3
+volunteer n
+volunteer v
+
+
+welfare n S3, W2
+whereas conjunction S2, W2
+whereby adv S3
+widespread adj W3
