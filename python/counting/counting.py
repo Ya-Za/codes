@@ -43,30 +43,41 @@ def main():
     [2, 1, 3]
     """
     # ex.1
-    for state in production_rule([3, 2]):
-        print(state)
+    # for state in production_rule([3, 2]):
+    #     print(state)
 
     # ex.2
+    # pr = ProductionRule([3, 2])
+    # for state in pr.get_states():
+    #     print(state)
+
+    # ex.3
     # n, k = 3, 3
     # print(len(list(permutation(n, k))))
     # for state in permutation(n, k):
     #     print(state)
 
-    # ex.3
+    # ex.4
     # n, k = 3, 3
+    # p = Permutation(n, k)
+    # for state in p.get_states():
+    #     print(state)
+
+    # ex.5
+    # n, k = 3, 2
     # print(len(list(combination(n, k))))
     # for state in combination(n, k):
     #     print(state)
 
-    # ex.4
+    # ex.6
+    n, k = 3, 2
+    c = Combination(n, k)
+    for state in c.get_states():
+        print(state)
+
+    # ex.7
     # for _ in range(10):
     #     print(random_permutation(3))
-
-    # ex.5
-    # pr = ProductionRule([3, 2])
-    # for state in pr.get_states():
-    #     print(state)
-
 
 class ProductionRule():
     """
@@ -146,7 +157,44 @@ def production_rule(lengths):
             yield state
         else:
             index -= 1
-        
+
+class Permutation():
+    """
+    k-permuations of n
+    ex.
+    >>> list(permutation(2, 2))
+    [
+        [0, 1],
+        [1, 0]
+    ]
+    """
+    def __init__(self, n, k):
+        self.n = n
+        self.k = k
+
+        self.state = [0] * k
+        self.selected = []
+
+    def get_states(self):
+        """
+        Return all possible states.
+        """
+        yield from self.recursive_next(0)
+
+    def recursive_next(self, index):
+        """
+        Recursively return next state
+        """
+        if index == self.k:
+            yield self.state
+        else:
+            for value in range(self.n):
+                if value not in self.selected:
+                    self.state[index] = value
+                    self.selected.append(value)
+                    yield from self.recursive_next(index + 1)
+                    self.selected.remove(value)
+
 def permutation(n, k):
     """
     k-permuations of n
@@ -189,9 +237,33 @@ def permutation(n, k):
     #         break
 
     # code #2
-    for state in production_rule([n] * k):
-        if len(set(state)) == k:
+    # for state in production_rule([n] * k):
+    #     if len(set(state)) == k:
+    #         yield state
+
+    # code #3
+    state = list(range(k))
+    yield state
+
+    selected = list(range(k))
+    index = k - 1
+
+    while index > -1:
+        selected.remove(state[index])
+        state[index] += 1
+        while state[index] in selected:
+            state[index] += 1
+        if state[index] < n:
+            selected.append(state[index])
+            for index in range(index + 1, k):
+                for value in range(n):
+                    if value not in selected:
+                        state[index] = value
+                        selected.append(value)
+                        break
             yield state
+        else:
+            index -= 1
 
 def combination(n, k):
     """
@@ -234,9 +306,60 @@ def combination(n, k):
     #         yield state
 
     # code #3
-    for state in production_rule([n] * k):
-        if all(state[i] < state[i+1] for i in range(k - 1)):
+    # for state in production_rule([n] * k):
+    #     if all(state[i] < state[i+1] for i in range(k - 1)):
+    #         yield state
+
+    # code #4
+    state = list(range(k))
+    yield state
+
+    index = k - 1
+    while index > -1:
+        state[index] += 1
+        if state[index] < (n - k + index + 1):
+            for index in range(index + 1, k):
+                state[index] = state[index - 1] + 1
             yield state
+        else:
+            index -= 1
+
+class Combination():
+    """
+    k-combination of n
+    ex.
+    >>> list(combination(4, 2))
+    [
+        [0, 1],
+        [0, 2],
+        [0, 3],
+        [1, 2],
+        [1, 3],
+        [2, 3]
+    ]
+    """
+    def __init__(self, n, k):
+        self.n = n
+        self.k = k
+
+        self.state = [0] * k
+
+    def get_states(self):
+        """
+        Return all possible states.
+        """
+        yield from self.recursive_next(0, 0)
+
+    def recursive_next(self, next_value, index):
+        """
+        Recursively return next state
+        """
+        if index == self.k:
+            yield self.state
+        else:
+            for value in range(next_value, self.n - self.k + index + 1):
+                self.state[index] = value
+                yield from self.recursive_next(value + 1, index + 1)
 
 def random_permutation(n):
     """
