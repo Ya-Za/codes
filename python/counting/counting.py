@@ -1,6 +1,8 @@
 """
 Counting method includes 'production rule', 'permutation', 'selection'
 """
+from pprint import pprint
+from functools import cmp_to_key
 import random
 
 def main():
@@ -41,6 +43,22 @@ def main():
     ex.4
     >>> random_permutation(3)
     [2, 1, 3]
+
+
+    ex.8
+    >>> data = [
+        [1, 0],
+        [1, 1],
+        [0, 0],
+        [0, 1]
+    ]
+    >>> sorted(data, key=cmp_to_key(lexical))
+    [
+        [0, 0],
+        [0, 1],
+        [1, 0],
+        [1, 1]
+    ]
     """
     # ex.1
     # for state in production_rule([3, 2]):
@@ -70,14 +88,23 @@ def main():
     #     print(state)
 
     # ex.6
-    n, k = 3, 2
-    c = Combination(n, k)
-    for state in c.get_states():
-        print(state)
+    # n, k = 3, 2
+    # c = Combination(n, k)
+    # for state in c.get_states():
+    #     print(state)
 
     # ex.7
     # for _ in range(10):
     #     print(random_permutation(3))
+
+    # ex.8
+    data = [
+        [1, 0],
+        [1, 1],
+        [0, 0],
+        [0, 1]
+    ]
+    pprint(sorted(data, key=cmp_to_key(lexical)))
 
 class ProductionRule():
     """
@@ -376,6 +403,26 @@ def random_permutation(n):
         del numbers[index]
 
     return res
+
+def lexical(a, b):
+    """
+    LEXICAL lexcial comparision between 'a' and 'b'.
+    CONSTRAITS:
+    1. len(a) == len(b)
+    ex.
+    >>> lexical([1, 2], [1, 3])
+    -1
+    """
+    if len(a) != len(b):
+        raise Exception('len(a) must be equal to len(b).')
+
+    for (x, y) in zip(a, b):
+        if x < y:
+            return -1
+        if x > y:
+            return 1
+
+    return 0
 
 if __name__ == '__main__':
     main()
