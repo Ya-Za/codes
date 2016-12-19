@@ -1,0 +1,11 @@
+def('a')
+call('a')
+{
+    call('a')
+    {
+        def('b')
+        call('b')
+    }
+    call('b')
+}
+call('b')
