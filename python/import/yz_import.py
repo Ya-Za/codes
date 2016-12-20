@@ -2,6 +2,7 @@
 YZ_IMPORT try to understand python compiler!
 """
 import os
+import re
 
 def main():
     """
@@ -90,23 +91,40 @@ class Tree(object):
         """
         GET_CALL_NODES returns all call nodes
         """
-        if str.startswith(root.value, 'call'):
+        if str.startswith(root.name, 'call'):
             yield root
         for node in root.childs:
             yield from self.get_call_nodes(node)
 
+    def get_def_nodes(self, root):
+        """
+        GET_DEF_NODES returns all def nodes of a node
+        """
+        if root is None:
+            return
+        for node in root.childs:
+            if str.startswith(node.name, 'def'):
+                yield node
+        yield from self.get_def_nodes(root.parent)
+
     def is_valid_call_node(self, call_node):
         """
-        IS_VALID_CALL_NODE returns true if there is an 'def' node in 
+        IS_VALID_CALL_NODE returns true if there is an 'def' node in
         """
         call_text = Tree.get_text_of_node(call_node)
-        res = [False]
-        self.rec_is_valid_call_node(call_node, call_text, res)
-        return res[0]
-    
+        return any(\
+            Tree.get_text_of_node(def_node) == call_text \
+            for def_node in self.get_def_nodes(call_node.parent) \
+        )
+
     @staticmethod
     def get_text_of_node(node):
-        
+        """
+        GET_TEXT_OF_NODE returns text of 'call(text)' or 'def(text)'
+        """
+        pattern = r'(?:call|def)\((\w+)\)'
+        match = re.search(pattern, node.name)
+        return match.group(1)
 
 
 class Node(object):
