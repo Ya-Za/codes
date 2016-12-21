@@ -14,9 +14,9 @@ classdef Product < handle
     end
     
     methods
-        function obj = Product(varargin)
-            obj.lists = varargin;
-            obj.value = zeros(1, length(varargin));
+        function obj = Product(lists)
+            obj.lists = lists;
+            obj.value = zeros(1, length(lists));
             obj.values = [];
             
             obj.next(1);
