@@ -1,11 +1,11 @@
-def('a')
-call('a')
+def(a)
+call(a)
 {
-    call('a')
+    call(a)
     {
-        def('b')
-        call('b')
+        def(b)
+        call(b)
     }
-    call('b')
+    call(a)
 }
-call('b')
+call(a)
