@@ -7,3 +7,7 @@ References
 1. [Dearing Fireball](http://daringfireball.net/projects/markdown/)
 1. [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 1. [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+
+  [sdf]: www.google.com "hello"
+[google]: www.google.com "hello"   
