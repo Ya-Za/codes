@@ -35,22 +35,24 @@ class Tree(object):
         """
         PARAM path as str: path of file
         """
-        self.path = path
-        self.root = self.make_tree()
-
-    def make_tree(self):
+        self.root = Tree.make_tree(path)
+    
+    @staticmethod
+    def make_tree(path):
         """
         MAKE_TREE makes a tree from a file with given path.
         """
-        (filename, _) = os.path.splitext(os.path.basename(self.path))
+        (filename, _) = os.path.splitext(os.path.basename(path))
         root = Node(filename)
-        for line in open(self.path):
+        for line in open(path):
             line = str.strip(line)
             if line == '{':
                 root.childs.append(Node(name='', parent=root))
                 root = root.childs[-1]
             elif line == '}':
                 root = root.parent
+            elif str.startswith(line, 'import'):
+                root = Tree.make_tree(Tree.get_text_of_node_name(line))
             else:
                 root.childs.append(Node(name=line, parent=root))
 
@@ -111,19 +113,19 @@ class Tree(object):
         """
         IS_VALID_CALL_NODE returns true if there is an 'def' node in
         """
-        call_text = Tree.get_text_of_node(call_node)
+        call_text = Tree.get_text_of_node_name(call_node.name)
         return any(\
-            Tree.get_text_of_node(def_node) == call_text \
+            Tree.get_text_of_node_name(def_node.name) == call_text \
             for def_node in self.get_def_nodes(call_node.parent) \
         )
 
     @staticmethod
-    def get_text_of_node(node):
+    def get_text_of_node_name(name):
         """
-        GET_TEXT_OF_NODE returns text of 'call(text)' or 'def(text)'
+        GET_TEXT_OF_NODE_NAME returns text of 'call(text)' or 'def(text)'
         """
-        pattern = r'(?:call|def)\((\w+)\)'
-        match = re.search(pattern, node.name)
+        pattern = r'(?:call|def|import)\((.+)\)'
+        match = re.search(pattern, name)
         return match.group(1)
 
 

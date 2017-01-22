@@ -1,3 +1,4 @@
+import(./file02.txt)
 def(a)
 call(a)
 {
