@@ -1,0 +1,7 @@
+2do
+===
+1. dumps (serialization):
+    - just like `json`
+1. loads (deserialization):
+    - ?
+1. schema
