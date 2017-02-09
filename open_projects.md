@@ -9,6 +9,8 @@ Python
 1. yaml
 1. csv
 1. xml
+    1. dtd
+    1. schema
 1. flask
 1. web scraping
 1. unit test
