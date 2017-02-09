@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Lynda Subtitle",
+
+    "type": "object",
+    "required": ["name", "isdir"],
+    "properties": {
+        "name": {
+            "description": "Name of folder or file",
+            "type": "string"
+        },
+        "isdir": {
+            "description": "True if it is a folder",
+            "type": "boolean"
+        },
+        "childs": {
+            "description": "Subfolders and files",
+            "type": "array",
+            "items": {
+                "$ref": "#"
+            }
+        },
+        "text": {
+            "description": "Content of file",
+            "type": "string"
+        }
+    }
+}

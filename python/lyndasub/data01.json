@@ -1,0 +1,14 @@
+{
+    "$schema": "./lyndasub_schema2.json",
+    "name": "folder01",
+    "items": [
+        {
+            "name": "file01",
+            "text": "Hellow, World!"
+        },
+        {
+            "name": "folder02",
+            "items": []
+        }
+    ]
+}

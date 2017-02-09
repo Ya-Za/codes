@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Lynda Subtitle",
+    "definitions": {
+        "node": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "Name of file or folder",
+                    "type": "string"
+                }
+            }
+        },
+        "file": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/node"
+                },
+                {
+                    "required": [
+                        "text"
+                    ],
+                    "properties": {
+                        "text": {
+                            "description": "Content of file",
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "folder": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/node"
+                },
+                {
+                    "required": [
+                        "items"
+                    ],
+                    "properties": {
+                        "items": {
+                            "description": "Subfolders and files",
+                            "type": "array",
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/file"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/folder"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+
+    "$ref": "#/definitions/folder"
+}
