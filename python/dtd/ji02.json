@@ -1,0 +1,23 @@
+{
+    "$schema": "./js02.json",
+    "name": "note",
+    "type": "element",
+    "elements": [
+        {
+            "name": "to",
+            "type": "pcdata"
+        },
+        {
+            "name": "from",
+            "type": "pcdata"
+        },
+        {
+            "name": "heading",
+            "type": "pcdata"
+        },
+        {
+            "name": "body",
+            "type": "pcdata"
+        }
+    ]
+}

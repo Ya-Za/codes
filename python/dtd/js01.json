@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "definitions": {
+        "person": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "age": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "type": "object",
+    "properties": {
+        "childs": { 
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/person"
+            }
+        }
+    }
+}
