@@ -1,6 +1,7 @@
 """
 TOPOLOGICAL_SORT
-(Kahn's algorithm)[https://en.wikipedia.org/wiki/Topological_sorting#Khan's algorithm]
+[Kahn's algorithm](https://en.wikipedia.org/wiki/Topological_sorting#Khan's algorithm)
+[Depth-first search](https://en.wikipedia.org/wiki/Topological_sorting#Depth-first search)
 """
 
 def main():
