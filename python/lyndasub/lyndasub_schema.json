@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Lynda Subtitle",
+    "definitions": {
+        "section": {
+            "type": "object",
+            "required": ["title", "transcript"],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "transcript": {
+                    "type": "string"
+                }
+            }
+        },
+        "chapter": {
+            "type": "object",
+            "required": ["title", "sections"],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/section"
+                    }
+                }
+            }
+        }
+    },
+    "type": "object",
+    "required": ["title", "chapters"],
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "chapters": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/chapter"
+            }
+        }
+    }
+}
