@@ -1,5 +1,9 @@
 {
     "$schema": "./js01.json",
-    "name": "Yasin",
-    "age": "19"
+    "childs": [
+        { 
+            "name": "Yasin",
+            "age": 10
+        }
+    ]
 }
