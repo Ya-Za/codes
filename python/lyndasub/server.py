@@ -12,11 +12,19 @@ def lyndasub():
     """
     LYNDASUB
     """
-    print(request.json)
+    # print(request.json)
     # data = LyndaSub.zip(**request.json)
     # return jsonify(data)
 
-    filename = LyndaSub.zip(**request.json)
+    args = {}
+    if request.method == 'GET':
+        args = {key:value for key, value in request.args.items()}
+        # args = request.args
+    else:
+        args = request.json
+
+    print(args)
+    filename = LyndaSub.zip(**args)
     return send_file(
         open(filename, 'rb'),
         as_attachment=True,
@@ -26,4 +34,4 @@ def lyndasub():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
