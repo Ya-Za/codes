@@ -96,6 +96,32 @@ class Plot {
         this.plot_data(data, type)
     }
 
+    plot2(x, y, type, H) {
+        if (typeof(H) == 'undefined') {
+            var R = [[1, 0], [0, -1]]
+            
+            var t = [-1, 1]
+            t = math.multiply(-1, math.multiply(R, t))
+            
+            var sx = this.width / 2
+            var sy = this.height / 2
+            var k = [[sx, 0], [0, sy]]
+            
+            var H = [
+                [R[0][0], R[0][1], t[0]],
+                [R[1][0], R[1][1], t[1]]
+            ]
+
+            H = math.multiply(k, H)
+        }
+
+        var data = [x, y, math.ones(x.length)._data]
+        data = math.multiply(H, data)
+        data = math.floor(data)
+
+        this.plot_data(data, type)
+    }
+
     get_px_index(x, y) {
         return 4 * (y * this.width + x)
     }
@@ -122,6 +148,9 @@ class Plot {
     }
 
     line_plot(data) {
+        /*LINE_PLOT
+        *
+        */
         this.ctx.moveTo(data[0][0], data[1][0])
         for (let i = 1, len = data[0].length; i < len; i++) {
             this.ctx.lineTo(data[0][i], data[1][i])
@@ -152,6 +181,6 @@ class Plot {
         var x = Plot.linspace(x_min, x_max, number)
         var y = x.map(value => fn(value))
 
-        this.plot(x, y, type)
+        this.plot2(x, y, type)
     }
 }
