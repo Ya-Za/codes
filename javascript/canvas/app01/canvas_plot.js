@@ -96,23 +96,49 @@ class Plot {
         this.plot_data(data, type)
     }
 
-    plot2(x, y, type, H) {
-        if (typeof(H) == 'undefined') {
+    get_H(R, t, sx, sy) {
+        if (typeof(R) == 'undefined') {
             var R = [[1, 0], [0, -1]]
-            
             var t = [-1, 1]
-            t = math.multiply(-1, math.multiply(R, t))
-            
             var sx = this.width / 2
             var sy = this.height / 2
-            var k = [[sx, 0], [0, sy]]
-            
-            var H = [
-                [R[0][0], R[0][1], t[0]],
-                [R[1][0], R[1][1], t[1]]
-            ]
+        }
 
-            H = math.multiply(k, H)
+        // t = -R*t
+        t = math.multiply(-1, math.multiply(R, t))
+        
+        var k = [[sx, 0], [0, sy]]
+        
+        var H = [
+            [R[0][0], R[0][1], t[0]],
+            [R[1][0], R[1][1], t[1]]
+        ]
+
+        H = math.multiply(k, H)
+
+        return H
+    }
+
+    transform_data(x, y, R, t, sx, sy) {
+        var H = this.get_H(R, t, sx, sy)
+
+        var data = [x, y, math.ones(x.length)._data]
+        data = math.multiply(H, data)
+        data = math.floor(data)
+
+        return data
+    }
+
+    plot2(x, y, type, H) {
+        if (typeof(H) == 'undefined') {
+            // var H = this.get_H(
+            //     [[1, 0], [0, -1]],
+            //     [-1, 1],
+            //     this.width / 2,
+            //     this.height / 2
+            // )
+
+            var H = this.get_H()
         }
 
         var data = [x, y, math.ones(x.length)._data]
