@@ -4,6 +4,7 @@ YZXPATH
 from pprint import pprint
 from lxml import etree
 
+
 def main():
     """
     MAIN
@@ -17,7 +18,10 @@ def main():
     # pprint(xpath.__dict__())
     # pprint(xpath.json())
 
-    for element in xpath.iter():
+    # for element in xpath.iter(tags=['book', 'price']):
+    #     print(element.tag)
+
+    for element in xpath.descendants(xpath.root, 'book'):
         print(element.tag)
 
 
@@ -25,6 +29,7 @@ class YZXpath:
     """
     YZXPATH
     """
+
     def __init__(self, filename):
         self.tree = etree.parse(filename)
         self.root = self.tree.getroot()
@@ -32,7 +37,7 @@ class YZXpath:
     def __str__(self):
         return etree.tostring(self.tree, pretty_print=True).decode('ascii')
 
-    def iter(self):
+    def iter(self, root=None, tags=None):
         """
         ITER
         """
@@ -40,11 +45,14 @@ class YZXpath:
             """
             RECURSIVE_ITER
             """
-            yield element
+            if tags is None or element.tag in tags:
+                yield element
             for child in element:
                 yield from recursive_iter(child)
 
-        return recursive_iter(self.root)
+        if root is None:
+            root = self.root
+        return recursive_iter(root)
 
     def __dict__(self):
         def make_text_node(text):
@@ -75,7 +83,6 @@ class YZXpath:
                 text = child.tail.strip()
                 if text != '':
                     res['child'].append(make_text_node(text))
-                
 
             return res
 
@@ -92,7 +99,7 @@ class YZXpath:
 
             # just text
             if len(element) == 0 and len(element.attrib) == 0:
-                return element.text 
+                return element.text
 
             res = {}
             # text
@@ -101,7 +108,8 @@ class YZXpath:
                 res['#text'] = text
             # attributes
             for key, value in element.items():
-                res[f'@{key}'] = value
+                # res[f'@{key}'] = value
+                res['@{}'.format(key)] = value
             # child elements
             for child in element:
                 tag = child.tag
@@ -113,7 +121,7 @@ class YZXpath:
                         res[tag] = [res[tag], content]
                 else:
                     res[tag] = content
-            
+
             return res
 
         return {
@@ -145,7 +153,7 @@ class YZXpath:
         """
         DESCENDANTS
         """
-        pass
+        yield from self.iter(element, [tag])
 
 
 if __name__ == '__main__':
