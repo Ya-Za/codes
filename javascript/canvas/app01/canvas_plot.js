@@ -3,7 +3,7 @@
 class Plot {
     constructor(canvas) {
         this.canvas = canvas
-        
+
         this.color = 'blue'
         this.radius = 5
 
@@ -97,7 +97,7 @@ class Plot {
     }
 
     get_H(R, t, sx, sy) {
-        if (typeof(R) == 'undefined') {
+        if (typeof (R) == 'undefined') {
             var R = [[1, 0], [0, -1]]
             var t = [-1, 1]
             var sx = this.width / 2
@@ -106,9 +106,9 @@ class Plot {
 
         // t = -R*t
         t = math.multiply(-1, math.multiply(R, t))
-        
+
         var k = [[sx, 0], [0, sy]]
-        
+
         var H = [
             [R[0][0], R[0][1], t[0]],
             [R[1][0], R[1][1], t[1]]
@@ -117,6 +117,43 @@ class Plot {
         H = math.multiply(k, H)
 
         return H
+    }
+
+    get_H_with_three_points(p1, p2, p3, sx, sy) {
+        var R, t
+        [R, t] = this.get_R_t(p1, p2, p3)
+
+        var k = [[sx, 0], [0, sy]]
+
+        R = math.multiply(k, R)
+
+        var H = [
+            [R[0][0], R[0][1], t[0]],
+            [R[1][0], R[1][1], t[1]]
+        ]
+
+        return H
+    }
+
+    get_R_t(p1, p2, p3) {
+        p2 = math.subtract(p2, p1)
+        p3 = math.subtract(p3, p1)
+
+        p2 = Plot.normalize(p2)
+        p3 = Plot.normalize(p3)
+
+        var t = p1
+
+        var R = [
+            [p2[0], p3[0]],
+            [p2[1], p3[1]]
+        ]
+
+        return [R, t]
+    }
+
+    static normalize(v) {
+        return math.divide(v, math.norm(v))
     }
 
     transform_data(x, y, R, t, sx, sy) {
@@ -129,8 +166,20 @@ class Plot {
         return data
     }
 
-    plot2(x, y, type, H) {
+    transform_data_with_H(x, y, H) {
         if (typeof(H) == 'undefined') {
+            var H = this.get_H()
+        }
+        
+        var data = [x, y, math.ones(x.length)._data]
+        data = math.multiply(H, data)
+        data = math.floor(data)
+
+        return data
+    }
+
+    plot2(x, y, type, H) {
+        if (typeof (H) == 'undefined') {
             // var H = this.get_H(
             //     [[1, 0], [0, -1]],
             //     [-1, 1],
@@ -168,7 +217,7 @@ class Plot {
     plot_data(data, type) {
         if (type == 'line') {
             this.line_plot(data)
-        } else if(type == 'scatter') {
+        } else if (type == 'scatter') {
             this.scatter_plot(data)
         }
     }
