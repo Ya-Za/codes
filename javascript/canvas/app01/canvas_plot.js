@@ -11,9 +11,9 @@ class Plot {
     }
 
     init() {
-        this.ctx = canvas.getContext('2d')
-        this.width = canvas.width
-        this.height = canvas.height
+        this.ctx = this.canvas.getContext('2d')
+        this.width = this.canvas.width
+        this.height = this.canvas.height
         this.halfwidth = Math.floor(this.width / 2)
         this.halfheight = Math.floor(this.height / 2)
 
@@ -208,5 +208,29 @@ class Plot {
         var y = x.map(value => fn(value))
 
         this.plot2(x, y, type)
+    }
+
+    quadraticBezier(x, y) {
+        var data = this.transform_data(x, y)
+        
+        this.ctx.beginPath()
+        this.ctx.moveTo(data[0][0], data[1][0])
+        this.ctx.quadraticCurveTo(data[0][1], data[1][1], data[0][2], data[1][2])
+        this.ctx.strokeStyle = 'red'
+        this.ctx.stroke()
+
+        this.scatter_plot(data)
+    }
+
+    cubicBezier(x, y) {
+        var data = this.transform_data(x, y)
+        
+        this.ctx.beginPath()
+        this.ctx.moveTo(data[0][0], data[1][0])
+        this.ctx.bezierCurveTo(data[0][1], data[1][1], data[0][2], data[1][2], data[0][3], data[1][3])
+        this.ctx.strokeStyle = 'red'
+        this.ctx.stroke()
+
+        this.scatter_plot(data)
     }
 }

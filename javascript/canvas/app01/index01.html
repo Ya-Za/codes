@@ -21,16 +21,7 @@
         var x = [-0.8, 0, 0.8]
         var y = [0, 0.8, 0]
 
-        var data = plt.transform_data(x, y)
-        
-        plt.ctx.beginPath()
-        plt.ctx.moveTo(data[0][0], data[1][0])
-        plt.ctx.quadraticCurveTo(data[0][1], data[1][1], data[0][2], data[1][2])
-        plt.ctx.strokeStyle = 'red'
-        plt.ctx.stroke()
-
-        plt.scatter_plot(data)
-        
+        plt.quadraticBezier(x, y)
         
     </script>
 </body>
