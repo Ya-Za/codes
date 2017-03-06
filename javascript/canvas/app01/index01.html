@@ -18,10 +18,45 @@
         plt.plot_function(Math.sin, -Math.PI, Math.PI, 20, 'scatter')
         */
 
+        /* example 2
         var x = [-0.8, 0, 0.8]
         var y = [0, 0.8, 0]
 
         plt.quadraticBezier(x, y)
+        var data = plt.transform_data(x, y)
+        
+        plt.ctx.beginPath()
+        plt.ctx.moveTo(data[0][0], data[1][0])
+        plt.ctx.quadraticCurveTo(data[0][1], data[1][1], data[0][2], data[1][2])
+        plt.ctx.strokeStyle = 'red'
+        plt.ctx.stroke()
+
+        plt.scatter_plot(data)
+        */
+
+        var p1 = [320, 240]
+        var p2 = [340, 220]
+        var p3 = [300, 220]
+
+        var x = [0, 1, 0]
+        var y = [0, 0, 1]
+
+        var H = plt.get_H_with_three_points(p1, p2, p3, 320, 240)
+        var data = plt.transform_data_with_H(x, y, H)
+
+        // x-axis
+        plt.ctx.strokeStyle = 'red'
+        plt.ctx.beginPath()
+        plt.ctx.moveTo(data[0][0], data[1][0])
+        plt.ctx.lineTo(data[0][1], data[1][1])
+        plt.ctx.stroke()
+
+        // y-axis
+        plt.ctx.strokeStyle = 'green'
+        plt.ctx.beginPath()
+        plt.ctx.moveTo(data[0][0], data[1][0])
+        plt.ctx.lineTo(data[0][2], data[1][2])
+        plt.ctx.stroke()
         
     </script>
 </body>
