@@ -10,14 +10,18 @@ def main():
 
     # params
     filenames = [
-        './data/a.txt',
-        './data/b.txt'
+        './data/names.txt',
+        './data/when.txt',
+        './data/where.txt',
+        './data/with.txt',
+        './data/what.txt',
+        './data/why.txt'
     ]
 
 
     # read
     table = [\
-        [line.strip() for line in open(filename) if line.strip() != '']\
+        [line.strip() for line in open(filename, encoding='utf-8') if line.strip() != '']\
         for filename in filenames\
     ]
 
@@ -32,12 +36,12 @@ def main():
     for row in range(rows):
         line = ''
         for col in range(cols):
-            line += table[col][row] + ' '
+            line += ' * ' + table[col][row] + ' * '
         lines.append(line)
 
 
     # write
-    with open('result.txt', 'w') as file:
+    with open('result.txt', 'w', encoding='utf-8') as file:
         for line in lines:
             file.write(line + '\n\n')
 
