@@ -46,6 +46,76 @@ classdef PolygonFilling
             end
         end
         
+%         function scanline(bw)
+%             % SCANLINE
+%             
+%             % params
+%             delay = 0.001;
+%             
+%             % fill inside
+%             box = Utils.get_bounding_box(bw);
+%             
+%             filled_bw = bw;
+%             
+%             x_min = max(2, box.x);
+%             x_max = box.x + box.width - 1;
+%             y_min = box.y;
+%             y_max = box.y + box.height - 1;
+%             % main loop
+%             for y = y_min:y_max
+%                 inside = false;
+%                 for x = x_min:x_max
+%                     if ~bw(y, x - 1) && bw(y, x)
+%                         inside = ~inside;
+%                     end
+%                     
+%                     if ~bw(y, x) && inside
+%                         filled_bw(y, x) = true;
+%                     end
+%                 end
+%                 
+%                 % show progress
+%                 imshow(filled_bw);
+%                 pause(delay);
+%             end
+%         end
+
+            function scanline(bw)
+            % SCANLINE
+            
+            % params
+            delay = 0.001;
+            
+            % fill inside
+            box = Utils.get_bounding_box(bw);
+            
+            filled_bw = bw;
+            
+            x_min = box.x;
+            x_max = box.x + box.width - 1;
+            y_min = box.y;
+            y_max = box.y + box.height - 1;
+            % main loop
+            for y = y_min:y_max
+                edges = [];
+                for x = x_min:x_max
+                    if ~bw(y, x - 1) && bw(y, x)
+                        edges(end + 1) = x;
+                    end
+                    
+                    if mod(length(edges), 2) == 0
+                        for i = 1:2:length(edges)
+                            filled_bw(y, edges(i):edges(i + 1)) = true;
+                        end
+                    end
+                end
+                
+                % show progress
+                imshow(filled_bw);
+                pause(delay);
+            end
+        end
+        
         function neighbours = get_neighbours(point)
             % GET_NEIGHBOURS
             x = point(1);

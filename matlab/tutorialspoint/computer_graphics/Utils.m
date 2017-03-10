@@ -52,7 +52,7 @@ classdef Utils
             box = Utils.get_bounding_box(bw);
             bw = double(bw);
             bw = insertShape(bw, 'rectangle', [box.x, box.y, box.width, box.height]);
-            imshow(bw);
+            figure(), imshow(bw);
         end
     end
     

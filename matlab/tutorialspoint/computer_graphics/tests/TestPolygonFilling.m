@@ -60,8 +60,15 @@ classdef TestPolygonFilling < matlab.unittest.TestCase
             % boundary_image = imbinarize(boundary_image);
             in_point = [100, 50];
             
-            % PolygonFilling.floodfill(boundary_image, in_point);
+            PolygonFilling.floodfill(boundary_image, in_point);
             
+            testCase.assertTrue(true);
+        end
+        
+        function test_scanline(testCase)
+            bw = imread('b3.bmp');
+            
+            % PolygonFilling.scanline(bw);
             testCase.assertTrue(true);
         end
     end

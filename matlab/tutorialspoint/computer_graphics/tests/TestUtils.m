@@ -53,7 +53,7 @@ classdef TestUtils < matlab.unittest.TestCase
         end
         
         function test_insert_bounding_box(testCase)
-            bw = imread('./b1.bmp');
+            bw = imread('./b3.bmp');
             Utils.insert_bounding_box(bw);
             
             testCase.assertTrue(true);
