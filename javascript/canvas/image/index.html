@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image</title>
+</head>
+<body>
+    <canvas id="canvas" width="640" height="480" style="border: 1px solid gray"></canvas>
+
+    <script>
+        var create_context2d = function (width, height) {
+            // CREATE_CONTEXT2D creates `canvasRenderingContext2D`
+
+            // create
+            // - canvas
+            var canvas = document.createElement('canvas')
+            canvas.width = width
+            canvas.height = height
+            // - canvasRenderingContext2D
+            return canvas.getContext('2d')
+        }
+        
+        var get_image_of_text = function (text = 'Hello, World!', width = 640, height = 480) {
+            // GET_IMAGE_OF_TEXT makes an image and writes given `text` on it.
+            // text is aligned to center.
+
+            // canvasRenderingContext2D
+            var ctx = create_context2d(width, height)
+
+            // text
+            // - props
+            ctx.font = '24px Arial'
+            
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            
+            ctx.lineWidth = 3
+            ctx.strokeStyle = 'black'
+            
+            ctx.fillStyle = 'white'
+
+            // - make
+            ctx.strokeText(text, width / 2, height / 2)
+            ctx.fillText(text, width / 2, height / 2)
+
+            // return
+            return ctx.getImageData(0, 0, width, height)
+        }
+    </script>
+
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+
+        ctx.putImageData(
+            get_image_of_text(),
+            0,
+            0
+        )
+    </script>
+</body>
+</html>
