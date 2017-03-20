@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="600" style="border:1px solid gray">
+        Your browser doesn't support the HTML5 cnavas.
+    </canvas>
+
+    <script>
+        CanvasRenderingContext2D.prototype.strokeLine = function (x1, y1, x2, y2) {
+            this.beginPath()
+            
+            this.moveTo(x1, y1)
+            this.lineTo(x2, y2)
+
+            this.stroke()
+        }
+
+        CanvasRenderingContext2D.prototype.fillCircle = function (cx, cy, r) {
+            this.beginPath()
+
+            this.arc(cx, cy, r, 0, 2 * Math.PI)
+
+            this.fill()
+        }
+    </script>
+    <script>
+        'use strict'
+        // params
+        // - text
+        var text = 'Aabcdefg'
+        var font = '24px Arial'
+        var font_color = 'black'
+        // - line
+        var line_width = 1
+        var line_color = 'gray'
+        // - marker
+        var marker_radius = 5
+        var marker_color = 'red'
+
+        // vars
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var width = canvas.width
+        var height = canvas.height
+
+        // stroke lines
+        ctx.lineWidth = line_width
+        ctx.strokeStyle = line_color
+
+        // - horizontal line
+        ctx.strokeLine(0, height / 2, width, height / 2)
+        // - vertical line
+        ctx.strokeLine(width / 2, 0, width / 2, height)
+
+        // fill markers
+        ctx.fillStyle = marker_color
+        // - centers
+        //  - cx
+        var cxs = [0, width / 2, width]
+        // - cy
+        var cys = [0, height / 2, height]
+        for (let cx of cxs) {
+            for (let cy of cys) {
+                ctx.fillCircle(cx, cy, marker_radius)
+            }
+        }
+
+        // fill text
+        ctx.font = font
+        ctx.fillStyle = font_color
+        // - alignment
+        //  - aligns
+        var aligns = ['left', 'center', 'right']
+        //  - baselines
+        var baselines = ['top', 'middle', 'bottom']
+
+        for (let x = 0; x < 3; x++) {
+            ctx.textAlign = aligns[x]
+            for (let y = 0; y < 3; y++) {
+                ctx.textBaseline = baselines[y]
+                ctx.fillText(text, cxs[x], cys[y])
+            }
+        }
+    </script>
+
+</body>
+
+</html>
