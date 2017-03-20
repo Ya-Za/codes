@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="480" height="480" style="border:1px solid gray"></canvas>
+
+    <script>
+        'use strict'
+
+        class yzClock {
+            constructor(width, height) {
+                this.width = width
+                this.height = height
+                this.cx = width / 2
+                this.cy = height / 2
+                this.r1 = null
+                this.r2 = null
+                this.r3 = null
+
+                this.init()
+            }
+
+            init() {
+                // context
+                var canvas = document.createElement('canvas')
+                canvas.width = this.width
+                canvas.height = this.height
+
+                this.ctx = canvas.getContext('2d')
+
+                this.background = this.create_clock_background()
+            }
+
+            create_clock_background() {
+                this.create_clock_dial()
+                this.create_minute_marks()
+                this.create_hour_marks()
+
+                return this.ctx.getImageData(0, 0, this.width, this.height)
+            }
+
+            create_clock_dial() {
+
+                var line_width = 5
+                var dr = 15
+                var cx = this.width / 2
+                var cy = this.height / 2
+                var rx1 = (this.width - line_width) / 2
+                var ry1 = (this.height - line_width) / 2
+                this.r1 = Math.min(rx1, ry1)
+                var rx2 = rx1 - dr
+                var ry2 = ry1 - dr
+                this.r2 = Math.min(rx2, ry2)
+
+                this.ctx.strokeStyle = 'black'
+                this.ctx.lineWidth = line_width
+
+                // outer
+                this.ctx.fillStyle = 'gray'
+
+                this.ctx.beginPath()
+                this.ctx.arc(cx, cy, this.r1, 0, 2 * Math.PI)
+                this.ctx.stroke()
+                this.ctx.fill()
+
+                // iner
+                this.ctx.fillStyle = 'white'
+
+                this.ctx.beginPath()
+                this.ctx.arc(cx, cy, this.r2, 0, 2 * Math.PI)
+                this.ctx.stroke()
+                this.ctx.fill()
+            }
+
+            static get_circular_points(number_of_ticks, cx, cy, r) {
+                var dtheta = (2 * Math.PI) / number_of_ticks
+                var points = []
+                for (let angle = 0; angle < 2 * Math.PI; angle += dtheta) {
+                    points.push({
+                        'x': cx + r * Math.cos(angle),
+                        'y': cy + r * Math.sin(angle)
+                    })
+                }
+
+                return points
+            }
+
+            create_hour_marks() {
+                // ticks
+                var number_of_ticks = 12
+                this.r3 = 0.9 * this.r2
+                // - begin_points
+                var begin_points = yzClock.get_circular_points(number_of_ticks, this.cx, this.cy, this.r3)
+                // - end_points
+                var end_points = yzClock.get_circular_points(number_of_ticks, this.cx, this.cy, this.r2)
+                // - stroke
+                this.ctx.strokeStyle = 'black'
+                this.ctx.lineWidth = 2
+                var length = Math.min(begin_points.length, end_points.length)
+                for (let i = 0; i < length; i++) {
+                    this.ctx.beginPath()
+                    this.ctx.moveTo(begin_points[i].x, begin_points[i].y)
+                    this.ctx.lineTo(end_points[i].x, end_points[i].y)
+                    this.ctx.stroke()
+                }
+            }
+
+            create_minute_marks() {
+                // ticks
+                var number_of_ticks = 60
+                // - begin_points
+                var begin_points = yzClock.get_circular_points(number_of_ticks, this.cx, this.cy, 0.95 * this.r2)
+                // - end_points
+                var end_points = yzClock.get_circular_points(number_of_ticks, this.cx, this.cy, this.r2)
+                // - stroke
+                this.ctx.strokeStyle = 'gray'
+                this.ctx.lineWidth = 2
+                var length = Math.min(begin_points.length, end_points.length)
+                for (let i = 0; i < length; i++) {
+                    this.ctx.beginPath()
+                    this.ctx.moveTo(begin_points[i].x, begin_points[i].y)
+                    this.ctx.lineTo(end_points[i].x, end_points[i].y)
+                    this.ctx.stroke()
+                }
+            }
+
+            get_clock_image(h, m, s) {
+                // text
+                var text = `${h}:${m}:${s}`
+                // - align
+                this.ctx.font = '72px Arial'
+                this.ctx.textAlign = 'center'
+                this.ctx.textBaseline = 'middle'
+                // - stroke
+                this.ctx.lineWidth = 3
+                this.ctx.strokeStyle = 'black'
+                // - fill
+                this.ctx.fillStyle = 'white'
+
+                // background
+                this.ctx.putImageData(this.background, 0, 0)
+
+                // stroke/fill text
+                this.ctx.strokeText(text, this.width / 2, this.height / 2)
+                this.ctx.fillText(text, this.width / 2, this.height / 2)
+
+                this.create_hour_hand(h + (m / 60))
+                this.create_minute_hand(m + (s / 60))
+                this.create_second_hand(s)
+
+                // return
+                return this.ctx.getImageData(0, 0, this.width, this.height)
+            }
+
+            create_hand(length, line_width, color, theta) {
+                this.ctx.lineWidth = line_width
+                this.ctx.strokeStyle = color
+
+                this.ctx.beginPath()
+                this.ctx.moveTo(this.cx, this.cy)
+                theta = (Math.PI / 2) - theta
+                this.ctx.lineTo(
+                    this.cx + length * Math.cos(theta),
+                    this.cy - length * Math.sin(theta)
+                )
+                this.ctx.stroke()
+            }
+
+            create_hour_hand(hour) {
+                if (hour > 12) {
+                    hour -= 12
+                }
+                this.create_hand(0.6 * this.r3, 7, 'black', hour * Math.PI / 6)
+            }
+
+            create_minute_hand(minute) {
+                this.create_hand(0.8 * this.r3, 5, 'black', minute * Math.PI / 30)
+            }
+
+            create_second_hand(second) {
+                this.create_hand(this.r3, 3, 'red', second * Math.PI / 30)
+            }
+        }
+    </script>
+    <script>
+        function render_clock(canvas) {
+            var ctx = canvas.getContext('2d')
+            var yzclock = new yzClock(canvas.width, canvas.height)
+
+            var handle = setInterval(
+                function () {
+                    var date = new Date()
+                    var h = date.getHours()
+                    var m = date.getMinutes()
+                    var s = date.getSeconds()
+
+                    ctx.putImageData(
+                        yzclock.get_clock_image(h, m, s),
+                        0,
+                        0
+                    )
+                },
+                1000
+            )
+
+            // setTimeout(
+            //     function () {
+            //         clearInterval(handle)
+            //     },
+            //     3600 * 1000
+            // )
+        }
+    </script>
+
+    <script>
+        var canvas = document.getElementById('canvas')
+
+        render_clock(canvas)
+    </script>
+</body>
+
+</html>
