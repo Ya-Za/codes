@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Circle</title>
+</head>
+
+<body>
+    <canvas id='canvas' width="640" height="480" style="border: 1px solid gray"></canvas>
+
+    <script>
+        function get_circular_points(number_of_ticks, cx, cy, r) {
+            var dtheta = (2 * Math.PI) / number_of_ticks
+            var points = []
+            for (let angle = 0; angle < 2 * Math.PI; angle += dtheta) {
+                points.push({
+                    'x': cx + r * Math.cos(angle),
+                    'y': cy + r * Math.sin(angle)
+                })
+            }
+
+            return points
+        }
+    </script>
+
+    <script>
+        var canvas = document.querySelector('#canvas')
+        var ctx = canvas.getContext('2d')
+        
+        var cx = canvas.width / 2
+        var cy = canvas.height / 2
+        var r = 200
+        var line_width = 3
+        var number_of_ticks = 12
+        
+        // circle
+        ctx.lineWidth = line_width
+        ctx.strokeStyle = 'red'
+        ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+        ctx.stroke()
+
+        // ticks
+        // - begin_points
+        begin_points = get_circular_points(number_of_ticks, cx, cy, 0.9 * r)
+        // - end_points
+        end_points = get_circular_points(number_of_ticks, cx, cy, r)
+        // - stroke
+        ctx.strokeStyle = 'black'
+        ctx.lineWidth = 1
+        var length = Math.min(begin_points.length, end_points.length)
+        for (let i = 0; i < length; i++) {
+            ctx.beginPath()
+            ctx.moveTo(begin_points[i].x, begin_points[i].y)
+            ctx.lineTo(end_points[i].x, end_points[i].y)
+            ctx.stroke()
+        }
+    </script>
+</body>
+
+</html>
