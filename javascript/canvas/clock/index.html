@@ -42,6 +42,7 @@
                 this.create_clock_dial()
                 this.create_minute_marks()
                 this.create_hour_marks()
+                this.create_numbers()
 
                 return this.ctx.getImageData(0, 0, this.width, this.height)
             }
@@ -78,6 +79,7 @@
                 this.ctx.stroke()
                 this.ctx.fill()
             }
+
 
             static get_circular_points(number_of_ticks, cx, cy, r) {
                 var dtheta = (2 * Math.PI) / number_of_ticks
@@ -128,6 +130,20 @@
                     this.ctx.moveTo(begin_points[i].x, begin_points[i].y)
                     this.ctx.lineTo(end_points[i].x, end_points[i].y)
                     this.ctx.stroke()
+                }
+            }
+
+            create_numbers() {
+                this.ctx.font = 'bold ' + 18 + 'pt Arial'
+                this.ctx.textAlign = 'center'
+                this.ctx.textBaseline = 'middle'
+                this.ctx.fillStyle = 'black'
+
+                var points = yzClock.get_circular_points(12, this.cx, this.cy, 0.9 * this.r3)
+                var numbers = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]
+
+                for (let i = 0; i < numbers.length; i++) {
+                    this.ctx.fillText(numbers[i].toString(), points[i].x, points[i].y)
                 }
             }
 

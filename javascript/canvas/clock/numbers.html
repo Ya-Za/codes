@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Numbers</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+
+    <script>
+        function drawCircle() {
+            ctx.beginPath()
+            ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+
+            ctx.lineWidth = 5
+            ctx.strokeStyle = 'red'
+            ctx.stroke()
+        }
+
+        function fillNumbers() {
+            var d = 0.8 * r
+            var theta0 = -Math.PI / 2
+            var dtheta = Math.PI / 6
+
+
+
+            ctx.font = 0.1 * r + 'px Arial'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+
+            ctx.save()
+
+            ctx.translate(cx, cy)
+            for (let i = 1; i < 13; i++) {
+                ctx.fillText(
+                    i.toString(),
+                    d * Math.cos(theta0 + i * dtheta),
+                    d * Math.sin(theta0 + i * dtheta)
+                )
+                ctx.stroke()
+            }
+
+            ctx.restore()
+        }
+    </script>
+
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var width = canvas.width
+        var height = canvas.height
+        var cx = width / 2
+        var cy = height / 2
+        var r = Math.min(cx, cy)
+
+        drawCircle()
+        fillNumbers()
+    </script>
+</body>
+
+</html>

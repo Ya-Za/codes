@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <canvas id="canvas" width="640" height="480" style="border: 1px solid black"></canvas>
+
+    <script>
+        function drawAxes(ctx, width, height) {
+            ctx.strokeStyle = 'black'
+            // main diagonal
+            ctx.beginPath()
+            ctx.moveTo(0, 0)
+            ctx.lineTo(width, height)
+            ctx.stroke()
+
+            // x-axis
+            ctx.beginPath()
+            ctx.moveTo(width / 2, 0)
+            ctx.lineTo(width / 2, height)
+            ctx.stroke()
+
+            // y-axis
+            ctx.beginPath()
+            ctx.moveTo(0, height / 2)
+            ctx.lineTo(width, height / 2)
+            ctx.stroke()
+        }
+
+        function drawRay(ctx, r) {
+            ctx.beginPath()
+            ctx.moveTo(0, 0)
+            ctx.lineTo(r, 0)
+            ctx.lineWidth = 5
+            ctx.strokeStyle = 'green'
+            ctx.stroke()
+        }
+
+        function fillCircle(ctx, color) {
+            ctx.beginPath()
+            var r = 10
+            ctx.arc(0, 0, r, 0, 2 * Math.PI)
+            ctx.fillStyle = color
+            ctx.fill()
+        }
+
+        function getRotationMatrix(angle) {
+            var angle = deg2rad(angle)
+
+            return [
+                [Math.cos(angle), -Math.sin(angle)],
+                [Math.sin(angle), Math.cos(angle)]
+            ] 
+        }
+
+        function setRotation(ctx, angle) {
+            var R = getRotationMatrix(angle)
+            ctx.transform(R[0][0], R[1][0], R[0][1], R[1][1], 0, 0)
+        }
+
+        function setTranslation(ctx, tx, ty) {
+            ctx.transform(1, 0, 0, 1, tx, ty)
+        }
+
+        function deg2rad(deg) {
+            return deg * Math.PI / 180
+        }
+    </script>
+    <script>
+        'use strict'
+
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var width = canvas.width
+        var height = canvas.height
+        var cx = width / 2
+        var cy = height / 2
+
+        drawAxes(ctx, width, height)
+
+        // setRotation(ctx, 45)
+        // setTranslation(ctx, cx, 0)
+        // setRotation(ctx, 45)
+
+        // ctx.scale(1, height / width)
+        // ctx.scale(1, width / height)
+        // ctx.scale(height / width, 1)
+        // ctx.scale(width / height, 1)
+        // ctx.scale(width / height, width / height)
+        // ctx.scale(height / width, height / width)
+        // ctx.scale(width / height, height / width)
+        // ctx.scale(height / width, width / height)
+
+        // ctx.rotate(deg2rad(45))
+        ctx.translate(cx, cy)
+        ctx.rotate(deg2rad(45))
+        
+        fillCircle(ctx, 'red')
+        drawRay(ctx, width / 2)
+
+
+
+        // ctx.resetTransform()
+        // ctx.translate(cx, cy)
+        // fillCircle(ctx, 'blue')
+    </script>
+</body>
+
+</html>
