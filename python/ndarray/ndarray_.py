@@ -133,25 +133,36 @@ class NDArray(object):
         return '\n'.join(res)
 
     def __str__(self):
-        res = []
+        res = ['\n\n']
 
         def str_rec(index):
             """
             STR_REC
             """
-            if len(index) == self.ndim:
+            length = len(index)
+            if length == self.ndim:
                 res.append(str(self.__getitem__(index)))
                 return
 
-            res.append('[')
-            for item in range(self.shape[len(index)]):
-                str_rec(index + [item])
-                if item < self.shape[len(index)] - 1:
-                    if len(index) == self.ndim - 1:
-                        res.append(', ')
-                    else:
-                        res.append(',\n\t')
+            # spaces
+            if length > 0 and index[-1] > 0:
+                res.append(' ' * length)
 
+            # `[`
+            res.append('[')
+
+            # [0, end)
+            size = self.shape[length] - 1
+            for item in range(size):
+                str_rec(index + [item])
+                # `,` and `\n`
+                res.append(', ')
+                res.append('\n' * (self.ndim - length - 1))
+
+            # end
+            str_rec(index + [size])
+
+            # `]`
             res.append(']')
 
         str_rec([])
