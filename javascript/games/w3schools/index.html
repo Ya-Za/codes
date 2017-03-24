@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>W3Schools</title>
+
+    <style>
+        table,
+        td {}
+        
+        button.controller {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+        
+        canvas#canvas {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            border: 1px solid gray;
+            outline: none;
+        }
+        
+        table#table_controller {
+            width: 80%;
+            height: 80%;
+            margin: auto;
+        }
+        
+        table#table_game {
+            width: 640px;
+            height: 480px;
+            margin: auto;
+        }
+        
+        tr#tr_canvas {
+            width: 100%;
+            height: 70%;
+        }
+        
+        tr#tr_controller {
+            width: 100%;
+            height: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="table_game">
+        <tr id="tr_canvas">
+            <td>
+                <canvas id="canvas" tabindex="1"></canvas>
+            </td>
+        </tr>
+        <tr id="tr_controller">
+            <td>
+                <table id="table_controller">
+                    <tr>
+                        <td></td>
+                        <td><button class="controller" onmousedown="game.move('up')">UP</button></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><button class="controller" onmousedown="game.move('left')">LEFT</button></td>
+                        <td><button class="controller" onmousedown="game.move('down')">DOWN</button></td>
+                        <td><button class="controller" onmousedown="game.move('right')">RIGHT</button></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        class Game {
+            constructor(canvas) {
+                this.ctx = canvas.getContext('2d')
+                this.width = canvas.width
+                this.height = canvas.height
+
+                this.player = new Player(this.ctx, this.width, this.height)
+
+                this.draw()
+            }
+
+            draw_background() {
+                this.ctx.fillStyle = 'white'
+                this.ctx.beginPath()
+                this.ctx.fillRect(0, 0, this.width, this.height)
+            }
+
+           move(direction) {
+               if (direction == 'up') this.player.move_up()
+               if (direction == 'down') this.player.move_down()
+               if (direction == 'left') this.player.move_left()
+               if (direction == 'right') this.player.move_right()
+               
+               this.draw()
+           }
+
+            draw() {
+                this.draw_background()
+                this.player.draw()
+            }
+
+        }
+
+        class Player {
+            constructor(ctx, width, height) {
+                this.ctx = ctx
+                this.width = width
+                this.height = height
+
+                this.step_size = 2
+
+                this.size = {
+                    width: 20,
+                    height: 20
+                }
+
+                this.pos = {
+                    x: 0,
+                    y: (this.height - this.size.height) / 2
+                }
+                
+            }
+
+            move_up() {
+                this.pos.y -= this.step_size
+                if (this.pos.y < 0) {
+                    this.pos.y = 0
+                }
+            }
+
+            move_down() {
+                this.pos.y += this.step_size
+                if (this.pos.y > this.height - this.size.height) {
+                    this.pos.y = this.height - this.size.height
+                }
+            }
+
+            move_left() {
+                this.pos.x -= this.step_size
+                if (this.pos.x < 0) {
+                    this.pos.x = 0
+                }
+            }
+
+            move_right() {
+                this.pos.x += this.step_size
+                if (this.pos.x > (this.width - this.size.width)) {
+                    this.pos.x = this.width - this.size.width
+                }
+            }
+
+            draw() {
+                this.ctx.fillStyle = 'red'
+                this.ctx.beginPath()
+                this.ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height)
+            }
+
+        }
+    </script>
+
+    <script>
+        'use strict'
+        var canvas = document.querySelector('#canvas')
+        var game = new Game(canvas)
+
+        // document.querySelector('#canvas').addEventListener('keydown', move);
+        window.addEventListener('keydown', move);
+        
+        function move(e) {
+            switch (e.key) {
+                case 'ArrowUp': game.move('up'); break
+                case 'ArrowDown': game.move('down'); break
+                case 'ArrowLeft': game.move('left'); break
+                case 'ArrowRight': game.move('right'); break
+            }
+        }
+    </script>
+</body>
+
+</html>
