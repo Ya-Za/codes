@@ -4,6 +4,8 @@ Python
 ------
 1. Markdown
 1. Documentations
+1. [itertools](https://docs.python.org/3/library/itertools.html#itertools.product)
+1. [operator overloading](http://thepythonguru.com/python-operator-overloading/)
 ---
 1. json
 1. yaml
@@ -18,3 +20,8 @@ Python
 Matlab
 ------
 1. unit test
+
+JavaScript
+----------
+1. [processingjs](http://processingjs.org/)
+1. svg
