@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <canvas id='canvas' width='320' height='240' style='background-color:gray'></canvas>
+
+    <script>
+        function drawClock() {
+            drawFace(ctx, radius)
+            drawNumbers(ctx, radius)
+            drawTime(ctx, radius)
+        }
+
+        function drawFace(ctx, radius) {
+            ctx.beginPath()
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI)
+            ctx.fillStyle = 'white'
+            ctx.fill()
+
+            var grad = ctx.createRadialGradient(0, 0, 0.95 * radius, 0, 0, 1.05 * radius)
+            grad.addColorStop(0, 'gray')
+            grad.addColorStop(0.5, 'white')
+            grad.addColorStop(1, 'gray')
+            ctx.strokeStyle = grad
+            ctx.lineWidth = 0.1 * radius
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.arc(0, 0, 0.05 * radius, 0, 2 * Math.PI)
+            ctx.fillStyle = 'gray'
+            ctx.fill()
+        }
+
+        function drawNumbers(ctx, radius) {
+            ctx.font = 'bold ' + 0.1 * radius + 'px Arial'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+
+            var theta = Math.PI / 6
+            for (let num = 1; num < 13; num++) {
+                ctx.save()
+
+                ctx.rotate(num * theta)
+                ctx.translate(0, -0.8 * radius)
+                ctx.rotate(-num * theta)
+                ctx.fillText(num.toString(), 0, 0)
+
+                ctx.restore()
+            }
+        }
+
+        function drawTime(ctx, radius) {
+            var now = new Date()
+            var hour = now.getHours()
+            var minute = now.getMinutes()
+            var second = now.getSeconds()
+
+            hour = hour % 12
+            hour += (minute / 60) + (second / 360)
+            // minute += (second / 60)
+
+            drawHand(ctx, hour * Math.PI / 6, 0.5 * radius, 5)
+            drawHand(ctx, minute * Math.PI / 30, 0.6 * radius, 3)
+            drawHand(ctx, second * Math.PI / 30, 0.7 * radius, 1)
+        }
+
+        function drawHand(ctx, pos, length, width) {
+            ctx.lineCap = 'round'
+            ctx.lineWidth = width
+
+            ctx.save()
+            ctx.rotate(pos)
+            ctx.moveTo(0, 0)
+            ctx.lineTo(0, -length)
+            ctx.stroke()
+            ctx.restore()
+
+        }
+    </script>
+
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var width = canvas.width
+        var height = canvas.height
+        var cx = width / 2
+        var cy = height / 2
+        var radius = Math.min(cx, cy)
+
+        ctx.translate(cx, cy)
+        radius = 0.9 * radius
+
+        setInterval(drawClock, 1000)
+// drawClock()
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text</title>
+</head>
+
+<body>
+    <svg width="800" height="600" style="border:1px solid gray" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <!--Lines-->
+        <g style="stroke: gray">
+            <!--- Horizental-->
+            <line x1="0" y1="300" x2="800" y2="300" />
+            <!--- Vertical-->
+            <line x1="400" y1="0" x2="400" y2="800" />
+        </g>
+        <!--Markers-->
+        <defs>
+            <circle id="marker" r="5" style="fill:red" />
+        </defs>
+        <!--- top left-->
+        <use x="0" y="0" xlink:href="#marker" />
+        <!--- top center-->
+        <use x="400" y="0" xlink:href="#marker" />
+        <!--- top right-->
+        <use x="800" y="0" xlink:href="#marker" />
+        <!--- middle left-->
+        <use x="0" y="300" xlink:href="#marker" />
+        <!--- middle center-->
+        <use x="400" y="300" xlink:href="#marker" />
+        <!--- middle right-->
+        <use x="800" y="300" xlink:href="#marker" />
+        <!--- bottom left-->
+        <use x="0" y="600" xlink:href="#marker" />
+        <!--- bottom left-->
+        <use x="400" y="600" xlink:href="#marker" />
+        <!--- bottom left-->
+        <use x="800" y="600" xlink:href="#marker" />
+
+        <!--Texts-->
+        <g style="fill: black; font-size: 24">
+            <!--- top left-->
+            <text x="0" y="0" text-anchor="start" alignment-baseline="before-edge">Aabcdefg</text>
+            <!--- top center-->
+            <text x="400" y="0" text-anchor="middle" alignment-baseline="before-edge">Aabcdefg</text>
+            <!--- top right-->
+            <text x="800" y="0" text-anchor="end" alignment-baseline="before-edge">Aabcdefg</text>
+            <!--- middle left-->
+            <text x="0" y="300" text-anchor="start" alignment-baseline="middle">Aabcdefg</text>
+            <!--- middle center-->
+            <text x="400" y="300" text-anchor="middle" alignment-baseline="middle">Aabcdefg</text>
+            <!--- middle right-->
+            <text x="800" y="300" text-anchor="end" alignment-baseline="middle">Aabcdefg</text>
+            <!--- bottom left-->
+            <text x="0" y="600" text-anchor="start" alignment-baseline="after-edge">Aabcdefg</text>
+            <!--- bottom center-->
+            <text x="400" y="600" text-anchor="middle" alignment-baseline="after-edge">Aabcdefg</text>
+            <!--- bottom right-->
+            <text x="800" y="600" text-anchor="end" alignment-baseline="after-edge">Aabcdefg</text>
+        </g>
+        Your browser doesn't support HTML5 svg element.
+    </svg>
+</body>
+
+</html>
