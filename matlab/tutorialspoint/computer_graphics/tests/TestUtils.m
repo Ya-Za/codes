@@ -58,6 +58,16 @@ classdef TestUtils < matlab.unittest.TestCase
             
             testCase.assertTrue(true);
         end
+        
+        function test_angled(testCase)
+            u = [1, -1];
+            v = [0, 2];
+            actual_value = Utils.angled(u, v);
+            
+            expected_value = 135;
+            
+            testCase.assertEqual(actual_value, expected_value);
+        end
     end
     
 end

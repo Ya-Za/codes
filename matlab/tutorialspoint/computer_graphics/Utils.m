@@ -54,7 +54,26 @@ classdef Utils
             bw = insertShape(bw, 'rectangle', [box.x, box.y, box.width, box.height]);
             figure(), imshow(bw);
         end
+        
+        function alpha = angle(u, v)
+            % ANGLE
+            alpha = abs(...
+                atan2(u(2), u(1)) - ...
+                atan2(v(2), v(1)) ...
+            );
+        
+            alpha = acos(...
+                dot(u, v) / ...
+                (norm(u) * norm(v)) ...
+            );
+        end
+        
+        function alpha = angled(u, v)
+            % ANGLED
+            alpha = rad2deg(...
+                Utils.angle(u, v)...
+            );
+        end
     end
-    
 end
 
