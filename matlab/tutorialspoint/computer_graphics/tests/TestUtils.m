@@ -9,7 +9,7 @@ classdef TestUtils < matlab.unittest.TestCase
         function add_to_path(testCase)
             testCase.original_path = path;
             [parent_folder, ~, ~] = fileparts(pwd);
-            addpath(fullfile(parent_folder));
+            addpath(parent_folder);
         end
     end
     
