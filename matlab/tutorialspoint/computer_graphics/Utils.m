@@ -74,6 +74,11 @@ classdef Utils
                 Utils.angle(u, v)...
             );
         end
+        
+        function test
+            suite = testsuite('./tests/TestUtils.m');
+            suite.run();
+        end
     end
 end
 
