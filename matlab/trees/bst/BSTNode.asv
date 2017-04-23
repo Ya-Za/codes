@@ -1,0 +1,16 @@
+classdef BSTNode < handle
+    %Binary search tree node
+    
+    properties
+        key
+        left
+        right
+        parent
+    end
+    
+    methods
+        obj = BSTNod
+    end
+    
+end
+
