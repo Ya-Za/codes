@@ -128,51 +128,6 @@ function json2parentheses(js) {
     return pa.join('');
 }
 
-// function json2str(js) {
-//     let str = [];
-
-//     // todo: remove `dashLine` method and add a `dashLine` parameter that a path from root downward
-//     function addLine(depth, isLastChild) {
-//         if (depth == 0) {
-//             return;
-//         }
-
-//         for (let i = 0; i < depth - 1; i++) {
-//             str.push('|  ');
-//         }
-
-//         if (isLastChild) {
-//             str.push('`');
-//         } else {
-//             str.push('|');
-//         }
-
-//         str.push('--')
-//     }
-
-//     function recursive(node, depth, isLastChild) {
-//         addLine(depth, isLastChild);
-//         str.push(node.key + '\n');
-
-//         if (node.childs != null) {
-//             let numberOfChilds = node.childs.length;
-//             for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
-//                 let child = node.childs[indexOfChild];
-
-//                 if (indexOfChild == numberOfChilds - 1) {
-//                     recursive(child, depth + 1, true);
-//                 } else {
-//                     recursive(child, depth + 1, false);
-//                 }
-//             }
-//         }
-//     }
-
-//     recursive(js, 0, false);
-
-//     return str.join('');
-// }
-
 function json2str(js) {
     let str = [];
 
