@@ -29,19 +29,68 @@ function main() {
 
     let jsS = {
         "a": {
-            "b": null,
-            "c": {
+            "b": {
+                "b1": null,
+                "b2": null
+            },
+            "c": null,
+            "d": {
                 "e": null,
                 "f": null
-            },
-            "d": null
+            }
         }
     };
 
-    let pa = "a(b,c(e,f),d)";
+    let pa = "a(b,c(e,f),d(g, h))";
 
+    // js = parantheses2json(pa);
     // console.log(json2parentheses(js));
-    js = parantheses2json(pa);
+    
+
+    // let x = json2short(js);
+    let x = short2json(jsS);
+    console.log(json2str(x));
+}
+
+function parantheses2json(pa) {
+    let stack = [];
+    let key = [];
+
+    let seperators = ['(', ')', ',']
+    for (let char of pa) {
+        if (seperators.indexOf(char) != -1) {
+            let keyStr = key.join('').trim();
+            if (keyStr != "") {
+                stack.push(
+                    {
+                        "key": keyStr,
+                        "childs": null
+                    }
+                );
+            }
+
+            key = [];
+
+            if (char == '(') {
+                stack.push(char);
+            } else if (char == ')') {
+                let list = [];
+                let item;
+
+                item = stack.pop();
+                while (item != '(') {
+                    list.push(item);
+                    item = stack.pop();
+                }
+
+                stack[stack.length - 1].childs = list.reverse();
+            }
+        } else {
+            key.push(char);
+        }
+    }
+
+    return stack.pop();
 }
 
 function json2parentheses(js) {
@@ -79,58 +128,137 @@ function json2parentheses(js) {
     return pa.join('');
 }
 
-function parantheses2json(pa) {
-    let stack = [];
-    let key = [];
+// function json2str(js) {
+//     let str = [];
 
-    for (let char of pa) {
-        if (char == '(') {
-            stack.push(
-                {
-                    "key": key.join('').trim(),
-                    "childs": null
+//     // todo: remove `dashLine` method and add a `dashLine` parameter that a path from root downward
+//     function addLine(depth, isLastChild) {
+//         if (depth == 0) {
+//             return;
+//         }
+
+//         for (let i = 0; i < depth - 1; i++) {
+//             str.push('|  ');
+//         }
+
+//         if (isLastChild) {
+//             str.push('`');
+//         } else {
+//             str.push('|');
+//         }
+
+//         str.push('--')
+//     }
+
+//     function recursive(node, depth, isLastChild) {
+//         addLine(depth, isLastChild);
+//         str.push(node.key + '\n');
+
+//         if (node.childs != null) {
+//             let numberOfChilds = node.childs.length;
+//             for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
+//                 let child = node.childs[indexOfChild];
+
+//                 if (indexOfChild == numberOfChilds - 1) {
+//                     recursive(child, depth + 1, true);
+//                 } else {
+//                     recursive(child, depth + 1, false);
+//                 }
+//             }
+//         }
+//     }
+
+//     recursive(js, 0, false);
+
+//     return str.join('');
+// }
+
+function json2str(js) {
+    let str = [];
+
+    function makeSpaceStr(numberOfSpaces: number): string {
+        let res = [];
+        for (let i = 0; i < numberOfSpaces; i++) {
+            res.push(' ');
+        }
+
+        return res.join('');
+    }
+
+    function recursive(node, prefix: string, isLastChild: boolean, isRoot: boolean = false) {
+        str.push(prefix);
+        if (!isRoot) {
+            str.push("--");
+        }
+        str.push(node.key + '\n');
+        
+        if (isLastChild) {
+            prefix = makeSpaceStr(prefix.length)
+        }
+        if (!isRoot) {
+            prefix += '  ';
+        }
+
+        if (node.childs != null) {
+            let numberOfChilds = node.childs.length;
+            for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
+                let child = node.childs[indexOfChild];
+
+                if (indexOfChild == numberOfChilds - 1) {
+                    recursive(child, prefix + '`', true);
+                } else {
+                    recursive(child, prefix + '|', false);
                 }
-            );
-
-            stack.push(char);
-
-            key = [];
-        } else if (char == ')') {
-            stack.push(
-                {
-                    "key": key.join('').trim(),
-                    "childs": null
-                }
-            );
-
-            key = [];
-            
-            let list = [];
-            let item;
-
-            item = stack.pop();
-            while (item != '(') {
-                list.push(item);
-                item = stack.pop();
             }
-
-            stack[stack.length - 1].childs = list;
-
-        } else if (char == ',') {
-            stack.push(
-                {
-                    "key": key.join('').trim(),
-                    "childs": null
-                }
-            );
-
-            key = [];
-        } else {
-            key.push(char);
         }
     }
 
-    return stack.pop();
+    recursive(js, '', false, true);
+
+    return str.join('');
+}
+
+function json2short(js) {
+    function recursive(node, res) {
+        res[node.key] = {};
+
+        if (node.childs != null) {
+            res = res[node.key];
+
+            for (let child of node.childs) {
+                recursive(child, res)
+            }
+        } else {
+            res[node.key] = null;
+        }
+    }
+
+    let root = {};
+    recursive(js, root);
+
+    return root;
+}
+
+function short2json(short) {
+    function recursive(node, key) {
+        let childs;
+
+        if (node == null) {
+            childs = null;
+        } else {
+            childs = [];
+            for (let item in node) {
+                childs.push(recursive(node[item], item))
+            }
+        }
+
+        return {
+            "key": key,
+            "childs": childs
+        }
+    }
+
+    return recursive(short, "root").childs[0];
 }
 
 function jsonShort2parentheses(js) {
