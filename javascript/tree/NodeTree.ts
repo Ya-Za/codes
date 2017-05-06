@@ -3,8 +3,8 @@
  */
 export default class NodeTree {
     name: string;
-    parent: Node;
-    childs: Node[];
+    parent: NodeTree;
+    childs: NodeTree[];
 
     constructor(name: string) {
         this.name = name;
