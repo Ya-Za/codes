@@ -1,29 +1,45 @@
 export default function splice_(
-    arr: any[], 
-    index: number = 0, 
-    howmany: number = 0, 
+    arr: any[],
+    index: number = null,
+    howmany: number = null,
     ...items: any[]): any[] {
-        // modified array
-        let modifiedArray = [];
-        // first
-        for (let i = 0; i < index; i++) {
-            modifiedArray[i] = arr[i];
-        }
-        // middle
-        for (let i = 0; i < items.length; i++) {
-            modifiedArray[index + i] = items[i];
-        }
-        // last
-        for (let i = index + howmany; i < arr.length; i++) {
-            modifiedArray[index + items.length + i] = arr[i];
-        }
+    // default values
+    if (index === null) {
+        index = arr.length;
+    }
+    if (howmany === null) {
+        howmany = arr.length - index;
+    }
+    // modified array
+    let modifiedArray = [];
+    // first
+    for (let i = 0; i < index; i++) {
+        modifiedArray[i] = arr[i];
+    }
+    // middle
+    for (let i = 0; i < items.length; i++) {
+        modifiedArray[index + i] = items[i];
+    }
+    // last
+    for (let i = index + items.length, j = index + howmany;
+        j < arr.length;
+        i++ , j++) {
+        modifiedArray[i] = arr[j];
+    }
 
-        arr = modifiedArray;
+    // removed array
+    let removedArray = [];
+    for (let i = 0; i < howmany; i++) {
+        removedArray[i] = arr[index + i];
+    }
 
-        // removed array
-        let removedArray = [];
-        for (let i = 0; i < howmany; i++) {
-            removedArray[i] = arr[index + i];
-        }
-        return removedArray;
+    // modify the original array
+    // - clear
+    arr.length = 0;
+    // - deep copy
+    for (let i = 0; i < modifiedArray.length; i++) {
+        arr[i] = modifiedArray[i];
+    }
+
+    return removedArray;
 }
