@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Tree
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Tree = (function () {
     function Tree() {
@@ -13,13 +13,7 @@ var Tree = (function () {
      */
     Tree.equals = function (t1, t2) {
         var res = true;
-        function recursive(parent1, node1, parent2, node2) {
-            // check parents
-            if (node1.parent != parent1 ||
-                node2.parent != parent2) {
-                res = false;
-                return;
-            }
+        function recursive(node1, node2) {
             // check names
             if (node1.name != node2.name) {
                 res = false;
@@ -32,13 +26,21 @@ var Tree = (function () {
             }
             var length = node1.childs.length;
             for (var i = 0; i < length; i++) {
-                recursive(node1, node1.childs[i], node2, node2.childs[i]);
+                var child1 = node1.childs[i];
+                var child2 = node2.childs[i];
+                // check parents
+                if (child1.parent != node1 ||
+                    child2.parent != node2) {
+                    res = false;
+                    return;
+                }
+                recursive(child1, child2);
                 if (!res) {
                     return;
                 }
             }
         }
-        recursive(null, t1.root, null, t2.root);
+        recursive(t1.root, t2.root);
         return res;
     };
     /**

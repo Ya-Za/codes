@@ -17,16 +17,7 @@ export default class Tree {
      */
     static equals(t1: Tree, t2: Tree): boolean {
         let res = true;
-        function recursive(
-            parent1: NodeTree, node1: NodeTree,
-            parent2: NodeTree, node2: NodeTree) {
-            // check parents
-            if (node1.parent != parent1 ||
-                node2.parent != parent2) {
-                res = false;
-                return;
-            }
-
+        function recursive(node1: NodeTree, node2: NodeTree) {
             // check names
             if (node1.name != node2.name) {
                 res = false;
@@ -41,14 +32,25 @@ export default class Tree {
 
             let length = node1.childs.length;
             for (let i = 0; i < length; i++) {
-                recursive(node1, node1.childs[i], node2, node2.childs[i]);
+                let child1 = node1.childs[i];
+                let child2 = node2.childs[i];
+
+                // check parents
+                if (child1.parent != node1 ||
+                    child2.parent != node2) {
+                    res = false;
+                    return;
+                }
+
+                recursive(child1, child2);
+                
                 if (!res) {
                     return;
                 }
             }
         }
 
-        recursive(null, t1.root, null, t2.root);
+        recursive(t1.root, t2.root);
 
         return res;
     }
