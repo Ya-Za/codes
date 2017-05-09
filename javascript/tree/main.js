@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Tree_1 = require("./Tree");
 main();
 function main() {
     var js = {
@@ -43,8 +46,18 @@ function main() {
     // js = parantheses2json(pa);
     // console.log(json2parentheses(js));
     // let x = json2short(js);
-    var x = short2json(jsS);
-    console.log(json2str(x));
+    // let x = short2json(jsS);
+    // console.log(json2str(x));
+    // Arrange
+    var tree = Tree_1.default.fromString("a(b,c)");
+    var expected = {
+        "a": {
+            "b": null,
+            "c": null
+        }
+    };
+    // Act
+    var actual = tree.toJson();
 }
 function parantheses2json(pa) {
     var stack = [];
