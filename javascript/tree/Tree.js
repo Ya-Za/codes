@@ -3,17 +3,17 @@
  */
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NodeTree_1 = require("./NodeTree");
-var Tree = (function () {
-    function Tree() {
+const NodeTree_1 = require("./NodeTree");
+class Tree {
+    constructor() {
     }
     /**
      * Check equality of two input trees.
      * @param t1 First tree.
      * @param t2 Second tree.
      */
-    Tree.equals = function (t1, t2) {
-        var res = true;
+    static equals(t1, t2) {
+        let res = true;
         function recursive(node1, node2) {
             // check names
             if (node1.name != node2.name) {
@@ -25,10 +25,10 @@ var Tree = (function () {
                 res = false;
                 return;
             }
-            var length = node1.childs.length;
-            for (var i = 0; i < length; i++) {
-                var child1 = node1.childs[i];
-                var child2 = node2.childs[i];
+            let length = node1.childs.length;
+            for (let i = 0; i < length; i++) {
+                let child1 = node1.childs[i];
+                let child2 = node2.childs[i];
                 // check parents
                 if (child1.parent != node1 ||
                     child2.parent != node2) {
@@ -43,46 +43,44 @@ var Tree = (function () {
         }
         recursive(t1.root, t2.root);
         return res;
-    };
+    }
     /**
      * Check equality with another tree.
      * @param t2 Second tree.
      */
-    Tree.prototype.equals = function (t2) {
+    equals(t2) {
         return Tree.equals(this, t2);
-    };
+    }
     /**
      * Create `Tree` object from parentheses formated string.
      * @param str Input parentheses formated string.
      */
-    Tree.fromString = function (str) {
-        var stack = [];
-        var nameArray = [];
-        var seperators = ['(', ')', ','];
-        for (var _i = 0, str_1 = str; _i < str_1.length; _i++) {
-            var char = str_1[_i];
+    static fromString(str) {
+        let stack = [];
+        let nameArray = [];
+        let seperators = ['(', ')', ','];
+        for (let char of str) {
             if (seperators.indexOf(char) != -1) {
-                var name_1 = nameArray.join('').trim();
-                if (name_1 != "") {
-                    stack.push(new NodeTree_1.default(name_1));
+                let name = nameArray.join('').trim();
+                if (name != "") {
+                    stack.push(new NodeTree_1.default(name));
                 }
                 nameArray = [];
                 if (char == '(') {
                     stack.push(char);
                 }
                 else if (char == ')') {
-                    var childs = [];
-                    var item = void 0;
+                    let childs = [];
+                    let item;
                     item = stack.pop();
                     while (item != '(') {
                         childs.push(item);
                         item = stack.pop();
                     }
-                    var parent_1 = stack[stack.length - 1];
-                    parent_1.childs = childs.reverse();
-                    for (var _a = 0, childs_1 = childs; _a < childs_1.length; _a++) {
-                        var child = childs_1[_a];
-                        child.parent = parent_1;
+                    let parent = stack[stack.length - 1];
+                    parent.childs = childs.reverse();
+                    for (let child of childs) {
+                        child.parent = parent;
                     }
                 }
             }
@@ -90,15 +88,15 @@ var Tree = (function () {
                 nameArray.push(char);
             }
         }
-        var tree = new Tree();
+        let tree = new Tree();
         tree.root = stack.pop();
         return tree;
-    };
+    }
     /**
      * Convert to string.
      */
-    Tree.prototype.toString = function () {
-        var strArray = [];
+    toString() {
+        let strArray = [];
         function recursive(node) {
             if (node == null) {
                 return;
@@ -108,10 +106,10 @@ var Tree = (function () {
                 return;
             }
             strArray.push('(');
-            var childs = node.childs;
-            var numberOfChilds = childs.length;
-            for (var indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
-                var child = childs[indexOfChild];
+            let childs = node.childs;
+            let numberOfChilds = childs.length;
+            for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
+                let child = childs[indexOfChild];
                 recursive(child);
                 if (indexOfChild < numberOfChilds - 1) {
                     strArray.push(',');
@@ -121,38 +119,37 @@ var Tree = (function () {
         }
         recursive(this.root);
         return strArray.join('');
-    };
+    }
     /**
      * Create `Tree` object from `json` string.
      * @param str Input `json` string.
      */
-    Tree.fromJson = function (js) {
+    static fromJson(js) {
         function recursive(jsnode, name, parent) {
-            var node = new NodeTree_1.default(name, parent);
+            let node = new NodeTree_1.default(name, parent);
             if (jsnode !== null) {
-                for (var key in jsnode) {
+                for (let key in jsnode) {
                     node.childs.push(recursive(jsnode[key], key, node));
                 }
             }
             return node;
         }
-        var tree = new Tree();
+        let tree = new Tree();
         if (js !== null && Object.keys(js).length != 0) {
-            var rootName = Object.keys(js)[0];
+            let rootName = Object.keys(js)[0];
             tree.root = recursive(js[rootName], rootName, null);
         }
         return tree;
-    };
+    }
     /**
      * Convert to `json` object.
      */
-    Tree.prototype.toJson = function () {
+    toJson() {
         // todo: convert to `iife` with arrow functions
         function recursive(node, jsnode) {
             jsnode[node.name] = {};
             if (node.childs.length != 0) {
-                for (var _i = 0, _a = node.childs; _i < _a.length; _i++) {
-                    var child = _a[_i];
+                for (let child of node.childs) {
                     recursive(child, jsnode[node.name]);
                 }
             }
@@ -160,11 +157,72 @@ var Tree = (function () {
                 jsnode[node.name] = null;
             }
         }
-        var js = {};
+        let js = {};
         recursive(this.root, js);
         return js;
-    };
-    return Tree;
-}());
+    }
+    /**
+     * Get pretty formatted string
+     */
+    pretty() {
+        // output pretty formatted string
+        let str = [];
+        /**
+         * Make a specified length space string
+         * @param numberOfSpaces Length of output string
+         */
+        function makeSpaceStr(numberOfSpaces) {
+            let res = [];
+            for (let i = 0; i < numberOfSpaces; i++) {
+                res.push(' ');
+            }
+            return res.join('');
+        }
+        function recursive(node, prefix, isLastChild, isRoot = false) {
+            str.push(prefix);
+            if (!isRoot) {
+                str.push("--");
+            }
+            str.push(node.name + '\n');
+            if (isLastChild) {
+                prefix = makeSpaceStr(prefix.length);
+            }
+            if (!isRoot) {
+                prefix += '  ';
+            }
+            if (node.childs != null) {
+                let numberOfChilds = node.childs.length;
+                for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
+                    let child = node.childs[indexOfChild];
+                    if (indexOfChild == numberOfChilds - 1) {
+                        recursive(child, prefix + '`', true);
+                    }
+                    else {
+                        recursive(child, prefix + '|', false);
+                    }
+                }
+            }
+        }
+        recursive(this.root, '', false, true);
+        return str.join('');
+    }
+    /**
+     * Add child to specified parent
+     * @param parent Target parent
+     * @param child Input child
+     */
+    static add(parent, child) {
+        child.parent = parent;
+        parent.childs.push(child);
+    }
+    static delete(node) {
+        let parent = node.parent;
+        if (parent === null) {
+            return;
+        }
+        let index = parent.childs.indexOf(node);
+        parent.childs.splice(index, 1);
+    }
+}
 exports.default = Tree;
 //# sourceMappingURL=Tree.js.map

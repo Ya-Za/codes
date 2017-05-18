@@ -181,7 +181,7 @@ export default class Tree {
         function recursive(node, jsnode) {
             jsnode[node.name] = {};
 
-            if (node.childs.length != 0) {            
+            if (node.childs.length != 0) {
                 for (let child of node.childs) {
                     recursive(child, jsnode[node.name])
                 }
@@ -194,5 +194,78 @@ export default class Tree {
         recursive(this.root, js);
 
         return js;
+    }
+
+    /**
+     * Get pretty formatted string
+     */
+    pretty() {
+        // output pretty formatted string
+        let str = [];
+
+        /**
+         * Make a specified length space string
+         * @param numberOfSpaces Length of output string
+         */
+        function makeSpaceStr(numberOfSpaces: number): string {
+            let res = [];
+            for (let i = 0; i < numberOfSpaces; i++) {
+                res.push(' ');
+            }
+
+            return res.join('');
+        }
+
+        function recursive(node, prefix: string, isLastChild: boolean, isRoot: boolean = false) {
+            str.push(prefix);
+            if (!isRoot) {
+                str.push("--");
+            }
+            str.push(node.name + '\n');
+
+            if (isLastChild) {
+                prefix = makeSpaceStr(prefix.length)
+            }
+            if (!isRoot) {
+                prefix += '  ';
+            }
+
+            if (node.childs != null) {
+                let numberOfChilds = node.childs.length;
+                for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
+                    let child = node.childs[indexOfChild];
+
+                    if (indexOfChild == numberOfChilds - 1) {
+                        recursive(child, prefix + '`', true);
+                    } else {
+                        recursive(child, prefix + '|', false);
+                    }
+                }
+            }
+        }
+
+        recursive(this.root, '', false, true);
+
+        return str.join('');
+    }
+
+    /**
+     * Add child to specified parent
+     * @param parent Target parent
+     * @param child Input child
+     */
+    static add(parent: NodeTree, child: NodeTree) {
+        child.parent = parent;
+        parent.childs.push(child);
+    }
+
+    static delete(node: NodeTree) {
+        let parent = node.parent;
+        if (parent === null) {
+            return;
+        }
+
+        let index = parent.childs.indexOf(node);
+        parent.childs.splice(index, 1)
     }
 }

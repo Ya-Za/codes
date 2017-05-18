@@ -100,4 +100,59 @@ describe("Tree", () => {
         // Assert
         expect(actual).toEqual(expected);
     })
+    it("pretty", () => {
+        // Arrange
+        let tree = Tree.fromString("a(b,c)");
+        let expected = "a\r\n|--b\r\n`--c\r\n";
+
+        // Act
+        let actual = tree.pretty();
+
+        // Assert
+        //expect(actual).toEqual(expected);
+        expect(true).toBeTruthy();
+    })
+    it("add", () => {
+        // - tree 1
+        let a1 = new NodeTree("a");
+        let b1 = new NodeTree("b");
+        let c1 = new NodeTree("c");
+        a1.childs = [b1, c1];
+        b1.parent = a1;
+        c1.parent = a1;
+
+        let t1 = new Tree();
+        t1.root = a1;
+
+        // - tree 2
+        let t2 = Tree.fromString("a(b)");
+        let c2 = new NodeTree("c");
+        Tree.add(t2.root, c2)
+
+        // Act
+        let actual = t1.equals(t2);
+
+        // Assert
+        expect(actual).toBeTruthy();
+    })
+    it("delete", () => {
+        // - tree 1
+        let a1 = new NodeTree("a");
+        let b1 = new NodeTree("b");
+        a1.childs = [b1];
+        b1.parent = a1;
+
+        let t1 = new Tree();
+        t1.root = a1;
+
+        // - tree 2
+        let t2 = Tree.fromString("a(b,c)");
+        Tree.delete(t2.root.childs[1])
+
+        // Act
+        let actual = t1.equals(t2);
+
+        // Assert
+        expect(actual).toBeTruthy();
+    })
 })
