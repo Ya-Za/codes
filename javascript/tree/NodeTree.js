@@ -4,10 +4,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Node
  */
 var NodeTree = (function () {
-    function NodeTree(name) {
+    function NodeTree(name, parent, childs) {
+        if (parent === void 0) { parent = null; }
+        if (childs === void 0) { childs = []; }
         this.name = name;
-        this.parent = null;
-        this.childs = [];
+        this.parent = parent;
+        this.childs = childs;
     }
     return NodeTree;
 }());

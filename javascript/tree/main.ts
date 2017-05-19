@@ -1,4 +1,8 @@
+import Tree from "./Tree";
+import NodeTree from "./NodeTree"
+
 main();
+
 function main() {
     let js = {
         "key": "a",
@@ -45,11 +49,23 @@ function main() {
 
     // js = parantheses2json(pa);
     // console.log(json2parentheses(js));
-    
+
 
     // let x = json2short(js);
-    let x = short2json(jsS);
-    console.log(json2str(x));
+    // let x = short2json(jsS);
+    // console.log(json2str(x));
+
+    // Arrange
+    let tree = Tree.fromString("a(b,c)");
+    let expected = {
+        "a": {
+            "b": null,
+            "c": null
+        }
+    };
+
+    // Act
+    let actual = tree.toJson();
 }
 
 function parantheses2json(pa) {
@@ -146,7 +162,7 @@ function json2str(js) {
             str.push("--");
         }
         str.push(node.key + '\n');
-        
+
         if (isLastChild) {
             prefix = makeSpaceStr(prefix.length)
         }

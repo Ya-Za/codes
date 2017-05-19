@@ -30,7 +30,7 @@ describe("Tree", () => {
 
         // Act
         let actual = t1.equals(t2);
-        
+
         // Assert
         expect(actual).toBeTruthy();
     });
@@ -51,9 +51,53 @@ describe("Tree", () => {
 
         // Act
         let actual = t1.equals(t2);
-        
+
         // Assert
         expect(actual).toBeTruthy();
+    })
+    it("toString", () => {
+        // Arrange
+        let tree = Tree.fromString("a(b,c)");
+        let expected = "a(b,c)";
 
+        // Act
+        let actual = tree.toString();
+
+        // Assert
+        expect(actual).toEqual(expected);
+    })
+    it("fromJson", () => {
+        // Arrange
+        let t1 = Tree.fromString("a(b,c)");
+
+        let js = {
+            "a": {
+                "b": null,
+                "c": null
+            }
+        };
+        let t2 = Tree.fromJson(js);
+
+        // Act
+        let actual = t1.equals(t2);
+
+        // Assert
+        expect(actual).toBeTruthy();
+    })
+    it("toJson", () => {
+        // Arrange
+        let tree = Tree.fromString("a(b,c)");
+        let expected = {
+            "a": {
+                "b": null,
+                "c": null
+            }
+        };
+
+        // Act
+        let actual = tree.toJson();
+
+        // Assert
+        expect(actual).toEqual(expected);
     })
 })

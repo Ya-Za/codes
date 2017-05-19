@@ -43,7 +43,7 @@ export default class Tree {
                 }
 
                 recursive(child1, child2);
-                
+
                 if (!res) {
                     return;
                 }
@@ -67,44 +67,132 @@ export default class Tree {
      * Create `Tree` object from parentheses formated string.
      * @param str Input parentheses formated string.
      */
-    static fromStr(str: string) {
+    static fromString(str: string) {
         let stack = [];
-        let name = [];
+        let nameArray = [];
 
         let seperators = ['(', ')', ',']
         for (let char of str) {
             if (seperators.indexOf(char) != -1) {
-                let nameStr = name.join('').trim();
-                if (nameStr != "") {
-                    stack.push(
-                        {
-                            "name": nameStr,
-                            "childs": null
-                        }
-                    );
+                let name = nameArray.join('').trim();
+                if (name != "") {
+                    stack.push(new NodeTree(name))
                 }
 
-                name = [];
+                nameArray = [];
 
                 if (char == '(') {
                     stack.push(char);
                 } else if (char == ')') {
-                    let list = [];
+                    let childs = [];
                     let item;
 
                     item = stack.pop();
                     while (item != '(') {
-                        list.push(item);
+                        childs.push(item);
                         item = stack.pop();
                     }
 
-                    stack[stack.length - 1].childs = list.reverse();
+                    let parent = stack[stack.length - 1];
+                    parent.childs = childs.reverse();
+
+                    for (let child of childs) {
+                        child.parent = parent;
+                    }
                 }
             } else {
-                name.push(char);
+                nameArray.push(char);
             }
         }
 
-        return stack.pop();
+        let tree = new Tree();
+        tree.root = stack.pop();
+        return tree;
+    }
+
+    /**
+     * Convert to string.
+     */
+    toString() {
+        let strArray = [];
+
+        function recursive(node) {
+            if (node == null) {
+                return;
+            }
+
+            strArray.push(node.name);
+
+            if (node.childs.length == 0) {
+                return;
+            }
+
+            strArray.push('(')
+
+            let childs = node.childs;
+            let numberOfChilds = childs.length;
+
+            for (let indexOfChild = 0; indexOfChild < numberOfChilds; indexOfChild++) {
+                let child = childs[indexOfChild];
+                recursive(child);
+
+                if (indexOfChild < numberOfChilds - 1) {
+                    strArray.push(',')
+                }
+            }
+
+            strArray.push(')')
+        }
+
+        recursive(this.root);
+        return strArray.join('');
+    }
+
+    /**
+     * Create `Tree` object from `json` string.
+     * @param str Input `json` string.
+     */
+    static fromJson(js: object) {
+        function recursive(jsnode, name, parent) {
+            let node = new NodeTree(name, parent);
+
+            if (jsnode !== null) {
+                for (let key in jsnode) {
+                    node.childs.push(recursive(jsnode[key], key, node))
+                }
+            }
+
+            return node;
+        }
+
+        let tree = new Tree();
+        if (js !== null && Object.keys(js).length != 0) {
+            let rootName = Object.keys(js)[0];
+            tree.root = recursive(js[rootName], rootName, null);
+        }
+        return tree;
+    }
+
+    /**
+     * Convert to `json` object.
+     */
+    toJson() {
+        // todo: convert to `iife` with arrow functions
+        function recursive(node, jsnode) {
+            jsnode[node.name] = {};
+
+            if (node.childs.length != 0) {            
+                for (let child of node.childs) {
+                    recursive(child, jsnode[node.name])
+                }
+            } else {
+                jsnode[node.name] = null;
+            }
+        }
+
+        let js = {};
+        recursive(this.root, js);
+
+        return js;
     }
 }
