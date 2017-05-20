@@ -4,9 +4,9 @@ import NodeTree from "./NodeTree"
 main();
 
 function main() {
-    for (let v of numbers()) {
-        console.log(v);
-    }
+    // let n = [...numbers()];
+    let n = Array.from(numbers());
+    console.log(n);
 }
 
 function* one() {

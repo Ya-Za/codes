@@ -223,6 +223,16 @@ class Tree {
         let index = parent.childs.indexOf(node);
         parent.childs.splice(index, 1);
     }
+    /**
+     * Depth first search
+     * @param node Input node
+     */
+    static *dfs(node) {
+        yield node;
+        for (let child of node.childs) {
+            yield* Tree.dfs(child);
+        }
+    }
 }
 exports.default = Tree;
 //# sourceMappingURL=Tree.js.map

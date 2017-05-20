@@ -129,5 +129,23 @@ describe("Tree", () => {
         // Assert
         expect(actual).toBeTruthy();
     });
+    it("dfs", () => {
+        // Arrange
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+        b.childs = [d];
+        d.parent = b;
+        let expected = [a, b, d, c];
+        // Act
+        let t = Tree_1.default.fromString("a(b(d),c)");
+        let actual = [...Tree_1.default.dfs(t.root)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
 });
 //# sourceMappingURL=TreeSpec.js.map

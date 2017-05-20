@@ -2,10 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 main();
 function main() {
-    let n = numbers();
-    for (let v of n) {
-        console.log(v);
-    }
+    // let n = [...numbers()];
+    let n = Array.from(numbers());
+    console.log(n);
 }
 function* one() {
     yield* two();
