@@ -54,7 +54,7 @@ describe("Tree", () => {
 
         // Assert
         expect(actual).toBeTruthy();
-    })
+    });
     it("toString", () => {
         // Arrange
         let tree = Tree.fromString("a(b,c)");
@@ -65,7 +65,7 @@ describe("Tree", () => {
 
         // Assert
         expect(actual).toEqual(expected);
-    })
+    });
     it("fromJson", () => {
         // Arrange
         let t1 = Tree.fromString("a(b,c)");
@@ -83,7 +83,7 @@ describe("Tree", () => {
 
         // Assert
         expect(actual).toBeTruthy();
-    })
+    });
     it("toJson", () => {
         // Arrange
         let tree = Tree.fromString("a(b,c)");
@@ -99,7 +99,7 @@ describe("Tree", () => {
 
         // Assert
         expect(actual).toEqual(expected);
-    })
+    });
     it("pretty", () => {
         // Arrange
         let tree = Tree.fromString("a(b,c)");
@@ -111,7 +111,7 @@ describe("Tree", () => {
         // Assert
         //expect(actual).toEqual(expected);
         expect(true).toBeTruthy();
-    })
+    });
     it("add", () => {
         // - tree 1
         let a1 = new NodeTree("a");
@@ -134,7 +134,7 @@ describe("Tree", () => {
 
         // Assert
         expect(actual).toBeTruthy();
-    })
+    });
     it("delete", () => {
         // - tree 1
         let a1 = new NodeTree("a");
@@ -154,5 +154,28 @@ describe("Tree", () => {
 
         // Assert
         expect(actual).toBeTruthy();
-    })
+    });
+    it("dfs", () => {
+        // Arrange
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+        
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+
+        b.childs = [d];
+        d.parent = b;
+
+        let expected = [a, b, d, c];
+
+        // Act
+        let t = Tree.fromString("a(b(d),c)");
+        let actual = [...Tree.dfs(t.root)];
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
 })
