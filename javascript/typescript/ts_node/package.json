@@ -1,0 +1,12 @@
+{
+  "name": "ts_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./out/main.ts",
+  "scripts": {
+    "test": "jasmine --config=./src/spec/support/jasmine.json"
+  },
+  "keywords": [],
+  "author": "YaZa",
+  "license": "ISC"
+}
