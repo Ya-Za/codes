@@ -1,5 +1,5 @@
-/// <reference path="../typings/globals/jasmine/index.d.ts" />
 "use strict";
+/// <reference path="../typings/globals/jasmine/index.d.ts" />
 Object.defineProperty(exports, "__esModule", { value: true });
 const Tree_1 = require("../Tree");
 const NodeTree_1 = require("../NodeTree");
@@ -131,6 +131,7 @@ describe("Tree", () => {
     });
     it("dfs", () => {
         // Arrange
+        // "a(b(d),c)"
         let a = new NodeTree_1.default("a");
         let b = new NodeTree_1.default("b");
         let c = new NodeTree_1.default("c");
@@ -142,8 +143,61 @@ describe("Tree", () => {
         d.parent = b;
         let expected = [a, b, d, c];
         // Act
-        let t = Tree_1.default.fromString("a(b(d),c)");
-        let actual = [...Tree_1.default.dfs(t.root)];
+        let actual = [...Tree_1.default.dfs(a)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("bfs", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+        b.childs = [d];
+        d.parent = b;
+        let expected = [a, b, c, d];
+        // Act
+        let actual = [...Tree_1.default.bfs(a)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("ancestors", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+        b.childs = [d];
+        d.parent = b;
+        let expected = [b, a];
+        // Act
+        let actual = [...Tree_1.default.ancestors(d)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("descendants", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+        b.childs = [d];
+        d.parent = b;
+        let expected = [d];
+        // Act
+        let actual = [...Tree_1.default.descendants(b)];
         // Assert
         expect(actual).toEqual(expected);
     });

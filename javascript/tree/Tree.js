@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Tree
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const NodeTree_1 = require("./NodeTree");
 class Tree {
@@ -225,13 +225,47 @@ class Tree {
     }
     /**
      * Depth first search
-     * @param node Input node
+     * @param root Input node
      */
-    static *dfs(node) {
-        yield node;
-        for (let child of node.childs) {
+    static *dfs(root) {
+        yield root;
+        for (let child of root.childs) {
             yield* Tree.dfs(child);
         }
+    }
+    /**
+     * Breadth first search
+     * @param root Input root
+     */
+    static *bfs(root) {
+        let queue = [root];
+        while (queue.length > 0) {
+            let node = queue.shift();
+            yield node;
+            for (let child of node.childs) {
+                queue.push(child);
+            }
+        }
+    }
+    /**
+     * Get ancestors
+     * @param node Input node
+     */
+    static *ancestors(node) {
+        let parent = node.parent;
+        while (parent !== null) {
+            yield parent;
+            parent = parent.parent;
+        }
+    }
+    /**
+     * Get descendants
+     * @param root Input root
+     */
+    static *descendants(root) {
+        let gen = Tree.bfs(root);
+        gen.next();
+        yield* gen;
     }
 }
 exports.default = Tree;

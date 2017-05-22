@@ -157,6 +157,7 @@ describe("Tree", () => {
     });
     it("dfs", () => {
         // Arrange
+        // "a(b(d),c)"
         let a = new NodeTree("a");
         let b = new NodeTree("b");
         let c = new NodeTree("c");
@@ -172,9 +173,77 @@ describe("Tree", () => {
         let expected = [a, b, d, c];
 
         // Act
-        let t = Tree.fromString("a(b(d),c)");
-        let actual = [...Tree.dfs(t.root)];
+        let actual = [...Tree.dfs(a)];
 
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("bfs", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+        
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+
+        b.childs = [d];
+        d.parent = b;
+
+        let expected = [a, b, c, d];
+
+        // Act
+        let actual = [...Tree.bfs(a)];
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("ancestors", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+        
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+
+        b.childs = [d];
+        d.parent = b;
+
+        let expected = [b, a];
+
+        // Act
+        let actual = [...Tree.ancestors(d)];
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("descendants", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+        
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+
+        b.childs = [d];
+        d.parent = b;
+
+        let expected = [d];
+
+        // Act
+        let actual = [...Tree.descendants(b)];
+       
         // Assert
         expect(actual).toEqual(expected);
     });
