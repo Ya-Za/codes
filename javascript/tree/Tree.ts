@@ -320,4 +320,82 @@ export default class Tree {
         gen.next();
         yield* gen;
     }
+
+    /**
+     * Get self
+     * @param node Input node
+     */
+    static self(node: NodeTree) {
+        return node;
+    }
+
+    /**
+     * Get parent
+     * @param node Input node
+     */
+    static parent(node: NodeTree) {
+        return node.parent;
+    }
+
+    /**
+     * Get childs
+     * @param node Input node
+     */
+    static *childs(node: NodeTree) {
+        for (let child of node.childs) {
+            yield child;
+        }
+    }
+
+    /**
+     * Get previous siblings
+     * @param node Input node
+     */
+    static *previousSiblings(node: NodeTree) {
+        let parent = node.parent;
+        if (parent === null) {
+            return;
+        }
+
+        let childs = parent.childs;
+        let index = childs.indexOf(node);
+        if (index === -1) {
+            return;
+        }
+
+        for (let i = 0; i < index; i++) {
+            yield childs[i];
+        }
+    }
+
+    /**
+     * Get next siblings
+     * @param node Input node
+     */
+    static *nextSiblings(node: NodeTree) {
+        let parent = node.parent;
+        if (parent === null) {
+            return;
+        }
+
+        let childs = parent.childs;
+        let index = childs.indexOf(node);
+        if (index === -1) {
+            return;
+        }
+
+        let length = childs.length;
+        for (let i = index + 1; i < length; i++) {
+            yield childs[i];
+        }
+    }
+
+    /**
+     * Get siblings
+     * @param node Input node
+     */
+    static *siblings(node: NodeTree) {
+        yield* Tree.previousSiblings(node);
+        yield* Tree.nextSiblings(node);
+    }
 }

@@ -201,5 +201,97 @@ describe("Tree", () => {
         // Assert
         expect(actual).toEqual(expected);
     });
+    it("self", () => {
+        // Arrange
+        // "a"
+        let a = new NodeTree_1.default("a");
+        let expected = a;
+        // Act
+        let actual = Tree_1.default.self(a);
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("parent", () => {
+        // Arrange
+        // "a(b)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        a.childs = [b];
+        b.parent = a;
+        let expected = a;
+        // Act
+        let actual = Tree_1.default.parent(b);
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("childs", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+        b.childs = [d];
+        d.parent = b;
+        let expected = [b, c];
+        // Act
+        let actual = [...Tree_1.default.childs(a)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("previousSiblings", () => {
+        // Arrange
+        // "a(b,c,d)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c, d];
+        b.parent = a;
+        c.parent = a;
+        d.parent = a;
+        let expected = [b];
+        // Act
+        let actual = [...Tree_1.default.previousSiblings(c)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("nextSiblings", () => {
+        // Arrange
+        // "a(b,c,d)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c, d];
+        b.parent = a;
+        c.parent = a;
+        d.parent = a;
+        let expected = [d];
+        // Act
+        let actual = [...Tree_1.default.nextSiblings(c)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("siblings", () => {
+        // Arrange
+        // "a(b,c,d)"
+        let a = new NodeTree_1.default("a");
+        let b = new NodeTree_1.default("b");
+        let c = new NodeTree_1.default("c");
+        let d = new NodeTree_1.default("d");
+        a.childs = [b, c, d];
+        b.parent = a;
+        c.parent = a;
+        d.parent = a;
+        let expected = [b, d];
+        // Act
+        let actual = [...Tree_1.default.siblings(c)];
+        // Assert
+        expect(actual).toEqual(expected);
+    });
 });
 //# sourceMappingURL=TreeSpec.js.map

@@ -267,6 +267,74 @@ class Tree {
         gen.next();
         yield* gen;
     }
+    /**
+     * Get self
+     * @param node Input node
+     */
+    static self(node) {
+        return node;
+    }
+    /**
+     * Get parent
+     * @param node Input node
+     */
+    static parent(node) {
+        return node.parent;
+    }
+    /**
+     * Get childs
+     * @param node Input node
+     */
+    static *childs(node) {
+        for (let child of node.childs) {
+            yield child;
+        }
+    }
+    /**
+     * Get previous siblings
+     * @param node Input node
+     */
+    static *previousSiblings(node) {
+        let parent = node.parent;
+        if (parent === null) {
+            return;
+        }
+        let childs = parent.childs;
+        let index = childs.indexOf(node);
+        if (index === -1) {
+            return;
+        }
+        for (let i = 0; i < index; i++) {
+            yield childs[i];
+        }
+    }
+    /**
+     * Get next siblings
+     * @param node Input node
+     */
+    static *nextSiblings(node) {
+        let parent = node.parent;
+        if (parent === null) {
+            return;
+        }
+        let childs = parent.childs;
+        let index = childs.indexOf(node);
+        if (index === -1) {
+            return;
+        }
+        let length = childs.length;
+        for (let i = index + 1; i < length; i++) {
+            yield childs[i];
+        }
+    }
+    /**
+     * Get siblings
+     * @param node Input node
+     */
+    static *siblings(node) {
+        yield* Tree.previousSiblings(node);
+        yield* Tree.nextSiblings(node);
+    }
 }
 exports.default = Tree;
 //# sourceMappingURL=Tree.js.map

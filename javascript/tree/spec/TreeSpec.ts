@@ -162,7 +162,7 @@ describe("Tree", () => {
         let b = new NodeTree("b");
         let c = new NodeTree("c");
         let d = new NodeTree("d");
-        
+
         a.childs = [b, c];
         b.parent = a;
         c.parent = a;
@@ -185,7 +185,7 @@ describe("Tree", () => {
         let b = new NodeTree("b");
         let c = new NodeTree("c");
         let d = new NodeTree("d");
-        
+
         a.childs = [b, c];
         b.parent = a;
         c.parent = a;
@@ -208,7 +208,7 @@ describe("Tree", () => {
         let b = new NodeTree("b");
         let c = new NodeTree("c");
         let d = new NodeTree("d");
-        
+
         a.childs = [b, c];
         b.parent = a;
         c.parent = a;
@@ -231,7 +231,7 @@ describe("Tree", () => {
         let b = new NodeTree("b");
         let c = new NodeTree("c");
         let d = new NodeTree("d");
-        
+
         a.childs = [b, c];
         b.parent = a;
         c.parent = a;
@@ -243,7 +243,123 @@ describe("Tree", () => {
 
         // Act
         let actual = [...Tree.descendants(b)];
-       
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("self", () => {
+        // Arrange
+        // "a"
+        let a = new NodeTree("a");
+
+        let expected = a;
+
+        // Act
+        let actual = Tree.self(a);
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("parent", () => {
+        // Arrange
+        // "a(b)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+
+        a.childs = [b];
+        b.parent = a;
+
+        let expected = a;
+
+        // Act
+        let actual = Tree.parent(b);
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("childs", () => {
+        // Arrange
+        // "a(b(d),c)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+
+        a.childs = [b, c];
+        b.parent = a;
+        c.parent = a;
+
+        b.childs = [d];
+        d.parent = b;
+
+        let expected = [b, c];
+
+        // Act
+        let actual = [...Tree.childs(a)];
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("previousSiblings", () => {
+        // Arrange
+        // "a(b,c,d)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+
+        a.childs = [b, c, d];
+        b.parent = a;
+        c.parent = a;
+        d.parent = a;
+
+        let expected = [b];
+
+        // Act
+        let actual = [...Tree.previousSiblings(c)];
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("nextSiblings", () => {
+        // Arrange
+        // "a(b,c,d)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+
+        a.childs = [b, c, d];
+        b.parent = a;
+        c.parent = a;
+        d.parent = a;
+
+        let expected = [d];
+
+        // Act
+        let actual = [...Tree.nextSiblings(c)];
+
+        // Assert
+        expect(actual).toEqual(expected);
+    });
+    it("siblings", () => {
+        // Arrange
+        // "a(b,c,d)"
+        let a = new NodeTree("a");
+        let b = new NodeTree("b");
+        let c = new NodeTree("c");
+        let d = new NodeTree("d");
+
+        a.childs = [b, c, d];
+        b.parent = a;
+        c.parent = a;
+        d.parent = a;
+
+        let expected = [b, d];
+
+        // Act
+        let actual = [...Tree.siblings(c)];
+
         // Assert
         expect(actual).toEqual(expected);
     });
