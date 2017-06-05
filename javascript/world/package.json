@@ -1,0 +1,17 @@
+{
+  "name": "world",
+  "version": "1.0.0",
+  "description": "2D Physics",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc",
+    "test": "jasmine"
+  },
+  "keywords": [],
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/mathjs": "0.0.34",
+    "mathjs": "^3.13.2"
+  }
+}

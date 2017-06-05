@@ -1,0 +1,1 @@
+export type R2 = [number, number];

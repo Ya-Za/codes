@@ -1,0 +1,134 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3772,        124]
+NotebookOptionsPosition[      3381,        106]
+NotebookOutlinePosition[      3727,        121]
+CellTagsIndexPosition[      3684,        118]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"$Assumptions", "=", 
+  RowBox[{
+   RowBox[{"Element", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m1", ",", "m2", ",", "w1", ",", "w2", ",", "v1", ",", "v2"}], 
+      "}"}], ",", "Reals"}], "]"}], " ", "&&", " ", 
+   RowBox[{"m1", ">", "0"}], "&&", 
+   RowBox[{"m2", ">", "0"}], "&&", 
+   RowBox[{"m2", "\[GreaterEqual]", "m1"}], "&&", 
+   RowBox[{"w1", "\[NotEqual]", " ", "w2"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"m1", " ", "w1"}], "+", 
+       RowBox[{"m2", " ", "w2"}]}], " ", "\[Equal]", " ", 
+      RowBox[{
+       RowBox[{"m1", " ", "v1"}], " ", "+", " ", 
+       RowBox[{"m2", " ", "v2"}]}]}], "&&", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"m1", " ", 
+        RowBox[{"w1", "^", "2"}]}], "+", 
+       RowBox[{"m2", " ", 
+        RowBox[{"w2", "^", "2"}]}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"m1", " ", 
+        RowBox[{"v1", "^", "2"}]}], "+", 
+       RowBox[{"m2", " ", 
+        RowBox[{"v2", "^", "2"}]}]}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"v1", ",", "v2"}], "}"}], ",", "Reals"}], "]"}], "//", 
+  "FullSimplify"}]}], "Input",
+ CellChangeTimes->{{3.7051247498862376`*^9, 3.7051248117925806`*^9}, {
+  3.705124842166457*^9, 3.7051249513845835`*^9}, {3.7051250528562613`*^9, 
+  3.705125086465639*^9}, {3.7051256974479685`*^9, 3.705125711731127*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"m1", "|", "m2", "|", "w1", "|", "w2", "|", "v1", "|", "v2"}], 
+    ")"}], "\[Element]", "Reals"}], "&&", 
+  RowBox[{"m1", ">", "0"}], "&&", 
+  RowBox[{"m2", ">", "0"}], "&&", 
+  RowBox[{"m2", "\[GreaterEqual]", "m1"}], "&&", 
+  RowBox[{"w1", "\[NotEqual]", "w2"}]}]], "Output",
+ CellChangeTimes->{3.7051250142594132`*^9, 3.7051250575690513`*^9, 
+  3.7051250877838006`*^9, 3.705125712636128*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"v1", "\[Rule]", "w1"}], ",", 
+     RowBox[{"v2", "\[Rule]", "w2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"v1", "\[Rule]", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"m1", " ", "w1"}], "-", 
+        RowBox[{"m2", " ", "w1"}], "+", 
+        RowBox[{"2", " ", "m2", " ", "w2"}]}], 
+       RowBox[{"m1", "+", "m2"}]]}], ",", 
+     RowBox[{"v2", "\[Rule]", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"2", " ", "m1", " ", "w1"}], "-", 
+        RowBox[{"m1", " ", "w2"}], "+", 
+        RowBox[{"m2", " ", "w2"}]}], 
+       RowBox[{"m1", "+", "m2"}]]}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7051250142594132`*^9, 3.7051250575690513`*^9, 
+  3.7051250877838006`*^9, 3.7051257128933764`*^9}]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.705131112908287*^9}]
+},
+WindowSize->{681, 676},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1414, 39, 88, "Input"],
+Cell[1997, 63, 459, 11, 30, "Output"],
+Cell[2459, 76, 816, 24, 43, "Output"]
+}, Open  ]],
+Cell[3290, 103, 87, 1, 50, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
