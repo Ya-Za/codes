@@ -1,0 +1,19 @@
+{
+  "name": "mathjs_",
+  "version": "1.0.0",
+  "description": "Mathjs review",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all compile main",
+    "compile": "tsc",
+    "main": "node ./build/main.js",
+    "test": "jasmine"
+  },
+  "keywords": [],
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/mathjs": "0.0.34",
+    "mathjs": "^3.13.2"
+  }
+}
