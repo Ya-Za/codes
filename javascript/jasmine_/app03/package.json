@@ -1,0 +1,18 @@
+{
+  "name": "app03",
+  "version": "0.1.0",
+  "description": "Investigate `jasmine` unit test",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "tsc spec/ts/*.ts --outDir ./spec/build/",
+    "test": "jasmine"
+  },
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^2.6.0"
+  },
+  "dependencies": {
+    "@types/jasmine": "^2.5.52"
+  }
+}
