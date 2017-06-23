@@ -1,4 +1,4 @@
-import World from "./World"
+import World from "./World";
 
 // world
 let canvas = document.querySelector("#canvas") as HTMLCanvasElement;
