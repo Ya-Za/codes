@@ -1,0 +1,51 @@
+classdef Plane < Plotable
+    %Plane
+    
+    properties
+        point
+        normal
+    end
+    
+    methods
+        function obj = Sphere(point, normal)
+            obj.point = point;
+            obj.normal = normal;
+        end
+        
+        function plot(obj, n)
+            if ~exist('n', 'var')
+    n = 20;
+end
+
+% ax + by + cz = d
+normal = normal / norm(normal);
+a = normal(1);
+b = normal(2);
+c = normal(3);
+d = dot(normal, point);
+
+
+if c ~= 0
+    x = linspace(limits(1), limits(2), n);
+    y = linspace(limits(1), limits(2), n);
+    [x, y] = meshgrid(x, y);
+    z = (d - a*x - b*y) / c;
+else
+    if b ~= 0
+        x = linspace(limits(1), limits(2), n);
+        z = linspace(limits(1), limits(2), n);
+        [x, z] = meshgrid(x, z);
+        y = (d - a*x - c*z) / b;
+    else
+        y = linspace(limits(1), limits(2), n);
+        z = linspace(limits(1), limits(2), n);
+        [y, z] = meshgrid(y, z);
+        x = (d - b*y - c*z) / a;
+    end
+end
+
+surf(x, y, z);
+    end
+    
+end
+
