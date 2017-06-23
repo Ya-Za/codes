@@ -1,0 +1,22 @@
+{
+  "name": "front_end",
+  "version": "1.0.0",
+  "description": "Front-end unit test",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm run compile-spec",
+    "test": "jasmine",
+    "prestart": "npm run compile-src",
+    "start": "start ./index.html",
+    "compile-src": "tsc -p ./tsconfig.json",
+    "compile-spec": "tsc -p ./tsconfig.spec.json"
+  },
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.52",
+    "@types/mathjs": "0.0.34",
+    "jasmine": "^2.6.0",
+    "mathjs": "^3.13.3"
+  }
+}
