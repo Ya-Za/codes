@@ -16,13 +16,9 @@ export class RayTracer {
     }
 
     // todo: `scene` should be an input parameter or a `property` of the class?
-    getNaturalColor(intersection: Intersection | null): Color {
-        if (intersection === null) {
-            return Color.default;
-        }
-
-        intersection = intersection as Intersection;
+    getNaturalColor(intersection: Intersection): Color {
         let color = Color.default;
+
         let pos = intersection.pos();
         let n = intersection.thing.normal(pos);
         let R = Vector.reflect(intersection.ray.dir, n);
@@ -65,12 +61,7 @@ export class RayTracer {
         return color;
     }
 
-    getReflectedColor(intersection: Intersection | null, depth: number): Color {
-        if (intersection === null) {
-            return Color.default;
-        }
-
-        intersection = intersection as Intersection;
+    getReflectedColor(intersection: Intersection, depth: number): Color {
         if (depth >= this.maxDepth) {
             return Color.gray; // todo: `gray` or `default`
         }
@@ -83,14 +74,8 @@ export class RayTracer {
         return this.trace(new Ray(intersection.pos(), R), depth + 1)
     }
 
-    shade(intersection: Intersection | null, depth: number): Color {
-        if (intersection === null) {
-            return Color.default;
-        }
-
-        intersection = intersection as Intersection;
-        return Color.sum(
-            Color.default,
+    shade(intersection: Intersection, depth: number): Color {
+        return Color.add(
             this.getReflectedColor(intersection, depth),
             this.getNaturalColor(intersection)
         );
@@ -99,6 +84,7 @@ export class RayTracer {
     trace(ray: Ray, depth: number): Color {
         let intersection = this.scene.intersect(ray);
         if (intersection !== null) {
+            intersection = intersection as Intersection;
             return this.shade(intersection, depth);
         } else {
             return Color.background;
