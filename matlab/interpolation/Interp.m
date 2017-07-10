@@ -1,374 +1,257 @@
 classdef Interp < handle
-    %INTERP implements `interpolation` methods
+    %Implements `interpolation` methods
     
-    properties
+    properties (Access = private)
         x
         y
-        min_x
-        max_x
-        interp_methods
+        
+        minx
+        maxx
     end
     
     methods
         function obj = Interp(x, y)
+            % x
             obj.x = x;
-            obj.min_x = min(x);
-            obj.max_x = max(x);
+            obj.minx = min(x);
+            obj.maxx = max(x);
+            % y
             obj.y = y;
-            obj.interp_methods = {...
-                'linear', ...
-                'previous', ...
-                'next', ...
-                'linear', ...
-                'cubic', ...
-                'spline', ...
-                'bazier' ...
-            };
         end
         
-        function [index, exact] = indexof(obj, xq)
-            %INDEXOF
-%             if xq < obj.min_x || xq > obj.max_x
-%                 error(...
-%                     'The valid range is [%0.3f, %0.3f]', ...
-%                     obj.min_x, ...
-%                     obj.max_x ...
-%                 );
-%             end
-            
-            for index = 1 : length(obj.x)
-                if obj.x(index) >= xq
-                    break
-                end
-            end
-            
-            exact = false;
-            if obj.x(index) == xq
-                exact = true;
-            end
-        end
-        
-        function yq = method_next(obj, xq)
-            %METHOD_NEXT
-            yq = zeros(size(xq));
-            for i = 1 : length(xq)
-                [index, ~] = obj.indexof(xq(i));
-                yq(i) = obj.y(index);
-            end
-        end
-        
-        function yq = method_previous(obj, xq)
-            %METHOD_PREVIOUS
-            yq = zeros(size(xq));
-            for i = 1 : length(xq)
-                [index, exact] = obj.indexof(xq(i));
-                if ~exact
-                    index = index - 1;
-                    if index == 0
-                        index = 1;
+        function index = indexOf(obj, xq)
+            %Index of query point in given data
+            if xq <= obj.minx
+                index = 1;
+            elseif xq >= obj.maxx
+                index = length(obj.x);
+            else
+                for index = 1:length(obj.x)
+                    if obj.x(index) >= xq
+                        break
                     end
                 end
-                yq(i) = obj.y(index);
             end
         end
         
-        function yq = method_nearest(obj, xq)
-            %METHOD_NEAREST
-            yq = zeros(size(xq));
-            for i = 1 : length(xq)
-                [next, exact] = obj.indexof(xq(i));
-                
-                index = next;
-                if ~exact
-                    previous = next - 1;
-                    if previous ~= 0
-                        if (xq(i) - obj.x(previous)) <= (obj.x(next) - xq(i))
-                        	 index = previous;
-                        end
-                    end
-                end
-                
-                yq(i) = obj.y(index);
-            end
-        end
-        
-        function yq = method_linear(obj, xq)
-            %METHOD_LINEAR
-            % suppose p0=(x0, y0), p1=(x1, y1) and y=a0+a1x1 so we have
-            % [1, x0; 1, x1] * [a0; a1] = [y0; y1]
+        function points = selectPoints(obj, xq, n)
+            % Select `n` points before and `n` points after query point
+            index = obj.indexOf(xq);
             
-            yq = zeros(size(xq));
-            for i = 1 : length(xq)
-                [next, ~] = obj.indexof(xq(i));
-                previous = next - 1;
-                if previous == 0
-                    yq(i) = obj.y(next);
+            % previous points
+            previousPoints = zeros(2, n);
+            for i = 1:n
+                validIndex = max(1, index - i);
+                previousPoints(:, i) = ...
+                    [obj.x(validIndex); obj.y(validIndex)];
+            end
+            
+            % next points
+            nextPoints = zeros(2, n);
+            maxIndex = length(obj.x);
+            for i = 1:n
+                validIndex = min(maxIndex, index + (i-1));
+                nextPoints(:, i) = ...
+                    [obj.x(validIndex); obj.y(validIndex)];
+            end
+            
+            points = [fliplr(previousPoints), nextPoints];
+        end
+        
+        function Yq = do(obj, Xq, method, n)
+            if ~exist('n', 'var')
+                if strcmp(method, 'spline')
+                    n = 2;
                 else
-                    x0 = obj.x(previous);
-                    x1 = obj.x(next);
-                    y0 = obj.y(previous);
-                    y1 = obj.y(next);
+                    n = 1;
+                end
+            end
 
-                    yq(i) = ([1, x0; 1, x1] \ [y0; y1])' * [1; xq(i)];
-                end
+            interpolator = Interp.selectInterploator(method);
+            
+            Yq = zeros(size(Xq));
+            for i = 1 : length(Xq)
+                xq = Xq(i);
+                Yq(i) = interpolator(...
+                    xq, ...
+                    obj.selectPoints(xq, n) ...
+                );
             end
         end
-        
-        function yq = method_spline(obj, xq, n)
-            %METHOD_SPLINE
-            % suppose p_i=(x_i,y_i) for i = 1..n and y=a_i*x^i for i =
-            % 0..(n/2)+1
-            
-            if nargin < 3
-                n = 4;
-            end
-            
-            yq = zeros(size(xq));
-            len_x = length(obj.x);
-            before = floor(n / 2);
-            after = n - before - 1;
-            for i = 1 : length(xq)
-                [index, ~] = obj.indexof(xq(i));
-
-                if (index - before) < 1 || (index + after) > len_x
-                    yq(i) = obj.y(index);
-                    continue
-                end
-                
-                x_ = [];
-                y_ = [];
-                for ii = -before : after
-                    x_(end + 1) = obj.x(index + ii);
-                    y_(end + 1) = obj.y(index + ii);
-                end
-                
-                A = zeros(n);
-                for ii = 1 : n
-                    for jj = 1: n
-                        A(ii, jj) = x_(ii)^(jj - 1);
-                    end
-                end
-                
-                a = A \ y_';
-                xq_ = [];
-                for ii = 1 : n
-                    xq_(end + 1) = xq(i)^(ii - 1);
-                end
-                
-                yq(i) = xq_ * a;
-            end
-        end
-        
-        function yq = method_bspline(obj, xq, n)
-            %METHOD_BSPLINE
-            % suppose p_i=(x_i,y_i) for i = 1..n and y=a_i*x^i for i =
-            % 0..(n/2)+1
-            
-            if nargin < 3
-                n = 4;
-            end
-            
-            yq = zeros(size(xq));
-            len_x = length(obj.x);
-            half_n = floor(n / 2);
-            for i = 1 : length(xq)
-                [index, exact] = obj.indexof(xq(i));
-
-                if exact || (index - half_n) < 1 || (index - 1 + half_n) > len_x
-                    yq(i) = obj.y(index);
-                    continue
-                end
-                
-                x_ = [];
-                y_ = [];
-                for ii = -half_n : half_n-1
-                    x_(end + 1) = obj.x(index + ii);
-                    y_(end + 1) = obj.y(index + ii);
-                end
-                
-                % A * a = b
-                % - A
-                A = zeros(n);
-                x_previous = x_(half_n);
-                x_next = x_(half_n + 1);
-                a = ones(n, 1);
-                leading_zeros = [];
-                for row = 1:2:n
-                    A(row, :) = [leading_zeros, Interp.polynomial(a, x_previous)];
-                    A(row + 1, :) = [leading_zeros, Interp.polynomial(a, x_next)];
-                    a = a(2:end);
-                    leading_zeros = [leading_zeros, 0];
-                end
-                
-                % - b
-                b = zeros(n, 1);
-                for row = 1:2:n
-                    previous_index = floor(length(y_) / 2);
-                    next_index = previous_index + 1;
-                    b(row) = y_(previous_index);
-                    b(row + 1) = y_(next_index);
-                    
-                    for ii = 2:length(y_)-1
-                        delta_previous = (y_(ii) - y_(ii - 1)) / (x_(ii) - xx_(ii - 1));
-                        delta_next = (y_(ii + 1) - y_(ii)) / (x_(ii + 1) - xx_(ii));
-                        y_(ii) = (delta_previous + delta_next) / 2;
-                        
-                        x_ = x_(2:end-1);
-                        y_ = y_(2:end-1);
-                    end
-                end
-                
-                % - a
-                a = A \ b;
-                xq_ = zeros(1, n);
-                for ii = 1 : n
-                    xq_(ii) = xq(i)^(ii - 1);
-                end
-                
-                yq(i) = xq_ * a;
-            end
-        end
-        
-        function names = get_method_names(obj)
-            %GET_METHOD_NAMES
-            names = [];
-            for i = 1 : length(obj.interp_methods)
-                names = [names, '\n', obj.interp_methods{i}];
-            end
-        end
-        
-        function yq = interp(obj, xq, method)
-            %INTERP
+    end
+    
+    % Interpolators
+    methods (Static)
+        function interpolator = selectInterploator(method)
             switch method
                 case 'next'
-                    yq = obj.method_next(xq);
+                    interpolator = @Interp.next;
                 case 'previous'
-                    yq = obj.method_previous(xq);
+                    interpolator = @Interp.previous;
                 case 'nearest'
-                    yq = obj.method_nearest(xq);
-                case 'linear'
-                    yq = obj.method_linear(xq);
+                    interpolator = @Interp.nearest;
+                case 'poly'
+                    interpolator = @Interp.poly;
                 case 'spline'
-                    yq = obj.method_spline(xq);
-                case 'bspline'
-                    yq = obj.method_spline(xq);
+                    interpolator = @Interp.spline;
+                case 'bazier'
+                    interpolator = @Interp.bazier;
                 otherwise
-                    error(...
-                        'The valid mehtods are:\n%s', ...
-                        obj.get_method_names ...
-                    )
+                    interpolator = @Interp.spline;
             end
         end
         
-        function plot(obj, xq, method)
-            %PLOT
-            yq = obj.interp(xq, method);
-            plot(xq, yq);
-            % stem(xq, yq);
+        function yq = next(~, points)
+            % Next
+            %
+            % Parameters
+            % ----------
+            % - xq: double
+            %   `x` of query point
+            % - points: 2-by-2n double matrix
+            %   `n` points before and `n` points after the query point
+            %
+            % Returns
+            % -------
+            % - yq: double
+            %   `y` of query point
             
-            hold('on');
-            plot(obj.x, obj.y, 'Color', 'red');
-            % stem(obj.x, obj.y, 'Color', 'red');
+            yq = points(2, 2);
+        end
+        
+        function yq = previous(~, points)
+            % Previous
+            
+            yq = points(2, 1);
+        end
+        
+        function yq = nearest(xq, points)
+            % Nearest
+            
+            if (points(1, 2) - xq) < (xq - points(1, 1))
+                yq = points(2, 2);
+            else
+                yq = points(2, 1);
+            end
+        end
+        
+        function yq = poly(xq, points)
+            % Polynomial
+            x = points(1, :)';
+            y = points(2, :)';
+            
+            % degree of polynomial is `n - 1`
+            n = length(x);
+            
+            % Xa = y
+            X = ones(n);
+            
+            for i = 2:n
+                X(:, i) = X(:, i-1) .* x;
+            end
+            
+            % coefficients
+            p = X \ y;
+            
+            % value of polynomial
+            yq = polyval(fliplr(p'), xq);
+        end
+        
+        function yq = spline(xq, points)
+            % Spline
+            x = points(1, :);
+            y = points(2, :);
+            x1 = x(2);
+            x2 = x(3);
+            y1 = y(2);
+            y2 = y(3);
+            y1_ = (y(3) - y(1)) / (x(3) - x(2));
+            y2_ = (y(4) - y(2)) / (x(4) - x(2));
+            
+            % Xa = y
+            X = [
+                1 x1 x1^2 x1^3
+                1 x2 x2^2 x2^3
+                0 1  2*x1 3*x1^2
+                0 1  2*x2 3*x2^2
+            ];
+        
+            % coefficients
+            p = X \ [y1, y2, y1_, y2_]';
+            
+            % value of polynomical
+            yq = polyval(fliplr(p'), xq);
+        end
+        
+        function yq = bazier(xq, points)
+            % Bazier
+            dx = points(1, end) - points(1, 1);
+            if dx == 0
+                yq = points(2, 1);
+                return;
+            end
+            t = (xq - points(1, 1)) / dx;
+            
+            p = [0, 0]';
+            n = size(points, 2);
+            for i = 1:n
+                p = p + b(t, i - 1, n - 1) * points(:, i);
+            end
+
+            function value = b(t, i, n)
+                value = nchoosek(n, i) * t^i * (1 - t)^(n - i);
+            end
+            
+            yq = p(2);
         end
     end
     
     methods (Static)
-        function test()
-            %TEST
-            close('all');
-            clear;
-            clc;
-            
-            delta1 = 0.5;
-            delta2 = 0.1;
-            x_min = 0;
-            x_max = 2*pi;
-            func = @sin;
-            
-            x = x_min:delta1:x_max;
-            y = func(x);
-            
-            xq = x_min:delta2:x_max;
-            
-            interp_obj = Interp(x, y);
-            interp_obj.plot(xq, 'bspline');
-        end
-        
-        function test_bezier()
-           % TEST_BEZIER
-           
-           close('all');
-           clear;
-           clc;
-           
-           x = [0, 1];
-           y = [0, 1];
-           
-           Interp.bezier(x, y);
-        end
-        
-        function y = polynomial_vector(a, x)
-            % POLYNOMIAL_VECTOR
-            %
-            % Parameters
-            % ----------
-            % - a: double vector
-            %   Coefficients of polynomial
-            % - x: double
-            %   Input x
-            %
-            % Returns
-            % - y: double vector
-            %   Output value same as `a`
-            
-            y = zeros(size(a));
-            for i = 1 : length(a)
-                y(i) = a(i) * x^(i - 1);
-            end
-        end
-        
-        function bezier(x, y, dx)
-            %BEZIER
-            
-            if ~exist('dx', 'var')
-                dx = 0.01;
-            end
-            
-            min_x = min(x);
-            max_x = max(x);
-            
-            x_ = min_x:dx:max_x;
-            y_ = zeros(size(x_));
-            
-            n = length(x_);
-            for i = 1:n
-                alpha = i / n;
-                
-                x2 = x;
-                y2 = y;
-                while length(x2) ~= 1
-                    x1 = x2;
-                    y1 = y2;
-                    x2 = [];
-                    y2 = [];
-                    for ii = 1:length(x1)-1
-                        x2(end + 1) = (1 - alpha) * x1(ii) + alpha * x1(ii + 1);
-                        y2(end + 1) = (1 - alpha) * y1(ii) + alpha * y1(ii + 1);
-                    end
+        function yq = interp(x, y, xq, method, n)
+            if ~exist('n', 'var')
+                if strcmp(method, 'spline')
+                    n = 2;
+                else
+                    n = 1;
                 end
-                
-                x_(i) = x2(1);
-                y_(i) = y2(1);
             end
+
+            interpObj = Interp(x, y);
+            yq = interpObj.do(xq, method, n);
+        end
+        
+        function plot(x, y, xq, method, n)
+            if ~exist('n', 'var')
+                if strcmp(method, 'spline')
+                    n = 2;
+                else
+                    n = 1;
+                end
+            end
+
+            yq = Interp.interp(x, y, xq, method, n);
             
-            % plot
-            % - scatter
-            scatter(x, y);
+            figure('Name', method);
+            % query points
+%             plot(...
+%                 xq, yq, ...
+%                 'LineStyle', '-', ...
+%                 'Color', 'blue' ...
+%             );
+
+            scatter(...
+                xq, yq, ...
+                'FaceColor', 'blue' ...
+            );
+            
+            % points
             hold('on');
-            
-            % - line
-            plot(x_, y_);
-            
+            scatter(...
+                x, y, ...
+                'FaceColor', 'red' ...
+            );
+            hold('off');
+            axis('tight');
         end
     end
     
