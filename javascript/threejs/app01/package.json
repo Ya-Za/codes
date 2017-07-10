@@ -1,0 +1,16 @@
+{
+  "name": "app01",
+  "version": "1.0.0",
+  "description": "Hello, Three.js!",
+  "main": "index.html",
+  "scripts": {
+    "prestart": "tsc",
+    "start": "start index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/three": "^0.84.15"
+  }
+}
