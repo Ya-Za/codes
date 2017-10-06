@@ -18,7 +18,7 @@ points = zeros(2, numberOfPoints);
 
 index = 1;
 for t = linspace(0, 1, numberOfPoints)
-    points(:, index) = bspline(t, controlPoints);
+    points(:, index) = bazier3(t, controlPoints);
     index = index + 1;
 end
 

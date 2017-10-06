@@ -2,4 +2,5 @@ import { movingCube } from "./utils";
 
 console.log("Hello, Three.js!");
 
-movingCube(window.innerWidth, window.innerHeight);
+let canvas = document.querySelector("#canvas") as HTMLCanvasElement;
+movingCube(canvas);

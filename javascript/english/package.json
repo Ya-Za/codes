@@ -1,0 +1,17 @@
+{
+  "name": "english",
+  "version": "1.0.0",
+  "description": "Grammar of the English Language",
+  "scripts": {
+    "pretest": "npm run compile-spec",
+    "test": "jasmine",
+    "compile-src": "tsc -p ./tsconfig.json",
+    "compile-spec": "tsc -p ./tsconfig.spec.json"
+  },
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.54",
+    "jasmine": "^2.8.0"
+  }
+}

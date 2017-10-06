@@ -1,0 +1,17 @@
+{
+  "name": "app01",
+  "description": "Hello, Three.js!",
+  "main": "index.html",
+  "authors": [
+    "Yasin Zamani <yasin.zamani@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Ya-Za/codes",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>CSS - SVG</title>
+    <style>
+        #css {
+            background-image: url("https://www.w3schools.com/css/paper.gif");
+        }
+    </style>
+</head>
+
+<body>
+    <div id="css"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" preserveAspectRatio="none">
+        <defs>
+            <pattern id="pattern" x="0" y="0" width="0.1" height="0.1" patternUnits="userSpaceOnUse" viewBox="0 0 1 1">
+                <image x="0" y="0" width="1" height="1" href="https://www.w3schools.com/css/paper.gif" preserveAspectRatio="none"/>
+            </pattern>
+        </defs>
+        <rect x="0" y="0" width="1" height="1" fill="url(#pattern)" />
+    </svg>
+</body>
+
+</html>

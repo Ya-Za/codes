@@ -1,0 +1,17 @@
+{
+  "name": "complex_",
+  "version": "1.0.0",
+  "description": "Study `complex` numbers.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "complex"
+  ],
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/complex": "^3.0.30",
+    "complex": "^3.0.1"
+  }
+}

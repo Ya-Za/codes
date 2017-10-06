@@ -1,0 +1,15 @@
+{
+  "name": "quaternion_",
+  "version": "1.0.0",
+  "description": "Study of `quaternions`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["quaternion"],
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "quaternion": "^2.0.0"
+  }
+}

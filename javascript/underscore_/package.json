@@ -1,0 +1,23 @@
+{
+  "name": "underscore_",
+  "version": "1.0.0",
+  "description": "Study `underscore`",
+  "scripts": {
+    "pretest": "npm run compile-spec",
+    "test": "jasmine",
+    "prestart": "tsc",
+    "start": "node ./build/main.js",
+    "compile-src": "tsc -p ./tsconfig.json",
+    "compile-spec": "tsc -p ./tsconfig.spec.json"
+  },
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/underscore": "^1.8.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.5.53",
+    "jasmine": "^2.7.0"
+  }
+}

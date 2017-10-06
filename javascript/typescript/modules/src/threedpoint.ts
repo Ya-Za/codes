@@ -1,5 +1,8 @@
-/// <reference path="twodpoint.ts" />
-class ThreeDPoint extends TwoDPoint {
+//// <reference path="twodpoint.ts" />
+
+import { TwoDPoint } from "./twodpoint";
+
+export class ThreeDPoint extends TwoDPoint {
     z: number
 
     constructor(x: number, y: number, z: number) {

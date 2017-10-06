@@ -1,13 +1,19 @@
-// import * as THREE from "three";
-/// <reference path="../node_modules/@types/three/index.d.ts" />
+import * as THREE from "three";
 
-export function movingCube(width: number, height: number) {
+//// <reference path="../node_modules/@types/three/index.d.ts" />
+
+export function movingCube(canvas: HTMLCanvasElement) {
+    let width = canvas.width;
+    let height = canvas.height;
+
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    let renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
+    let renderer = new THREE.WebGLRenderer({
+        "canvas": canvas
+    });
 
-    document.body.appendChild(renderer.domElement);
+    // renderer.setSize(width, height);
+    // document.body.appendChild(renderer.domElement);
 
     let geometry = new THREE.BoxGeometry(1, 1, 1);
     let material = new THREE.MeshBasicMaterial({

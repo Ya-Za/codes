@@ -1,4 +1,4 @@
-class TwoDPoint {
+export class TwoDPoint {
     x: number
     y: number
 
@@ -6,7 +6,7 @@ class TwoDPoint {
         this.x = x
         this.y = y
     }
-    
+
     toString() {
         return `${this.x}, ${this.y}`
     }

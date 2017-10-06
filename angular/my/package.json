@@ -1,0 +1,13 @@
+{
+  "name": "my-angular",
+  "version": "1.0.0",
+  "description": "Angular Study",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc -w"
+  },
+  "keywords": [],
+  "author": "Yain Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC"
+}

@@ -1,0 +1,14 @@
+https://stackoverflow.com/questions/7915734/intersection-and-union-of-polygons
+
+https://stackoverflow.com/questions/2272179/a-simple-algorithm-for-polygon-intersection?rq=1
+
+https://en.wikipedia.org/wiki/Vatti_clipping_algorithm
+
+http://www.mathworks.com/matlabcentral/fileexchange/18173-polygon-intersection
+
+http://boontaran.com/posts/view/gpcjs_javascript_port_of_gpc
+
+https://stackoverflow.com/questions/33502767/merging-intersecting-polygons-to-single-polygon
+
+http://jsxgraph.uni-bayreuth.de/wp/
+

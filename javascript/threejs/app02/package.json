@@ -1,0 +1,14 @@
+{
+  "name": "app02",
+  "version": "1.0.0",
+  "description": "Three.js app",
+  "scripts": {
+    "prestart": "tsc",
+    "start": "start index.html"
+  },
+  "author": "Yasin Zamani <yasin.zamani@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/three": "^0.84.18"
+  }
+}
